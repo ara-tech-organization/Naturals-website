@@ -1,4 +1,3 @@
-
 import { Card } from '@/components/ui/card';
 import { Users, Award, Heart, Target, Sparkles, Shield, Zap } from 'lucide-react';
 
@@ -49,17 +48,13 @@ const About = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section with Background Image */}
       <section 
-        className="relative py-32 text-white overflow-hidden"
+        className="relative py-32 text-white overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed"
+          backgroundImage: "linear-gradient(rgba(126, 71, 152, 0.8), rgba(126, 71, 152, 0.8)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-800 to-pink-800 opacity-85"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center" data-aos="fade-up">
             <h1 className="text-6xl font-bold mb-8">About Naturals Thanjavur</h1>
@@ -184,15 +179,11 @@ const About = () => {
 
       {/* Team Section */}
       <section 
-        className="py-20 text-white relative overflow-hidden"
+        className="py-20 text-white relative overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed"
+          backgroundImage: "linear-gradient(rgba(126, 71, 152, 0.9), rgba(126, 71, 152, 0.9)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-800 to-pink-800 opacity-90"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-5xl font-bold mb-6">Meet Our Expert Team</h2>

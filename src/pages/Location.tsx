@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { MapPin, Phone, Clock, Car, Navigation, Star } from 'lucide-react';
 import { useEffect } from 'react';
 import AOS from 'aos';
+import Map from '@/components/Map';
 
 const Location = () => {
   useEffect(() => {
@@ -123,11 +124,11 @@ const Location = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section with Background Image */}
       <section 
         className="relative h-screen bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+          backgroundImage: 'linear-gradient(rgba(126, 71, 152, 0.7), rgba(126, 71, 152, 0.7)), url(https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
         }}
       >
         <div className="absolute inset-0 flex items-center justify-center text-center text-white">
@@ -295,22 +296,9 @@ const Location = () => {
             </p>
           </div>
           
-          {/* Map Placeholder */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="zoom-in">
-            <div className="h-96 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="h-16 w-16 text-primary mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Interactive Map</h3>
-                <p className="text-gray-600 mb-4">All Naturals branches in Thanjavur</p>
-                <div className="flex flex-wrap justify-center gap-4">
-                  {branches.map((branch, index) => (
-                    <Button key={index} size="sm" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                      {branch.name.replace('Naturals ', '')}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {/* Enhanced Interactive Map */}
+          <div data-aos="zoom-in">
+            <Map />
           </div>
         </div>
       </section>
