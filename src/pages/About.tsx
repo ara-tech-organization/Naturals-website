@@ -214,7 +214,7 @@ const About = () => {
       <section className="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">Our Achievements</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Achievements</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Recognition and milestones that reflect our commitment to excellence
             </p>

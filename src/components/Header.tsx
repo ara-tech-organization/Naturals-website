@@ -30,8 +30,8 @@ const Header = () => {
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       {/* Top Bar */}
-      <div className="bg-primary text-white py-2">
-        <div className="container mx-auto px-4 flex justify-between items-center text-sm">
+      <div className="bg-primary text-white py-2 hidden lg:block">
+        <div className="container mx-auto px-4 flex justify-between items-center text-sm primary-header">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <Phone className="h-4 w-4" />
@@ -69,11 +69,10 @@ const Header = () => {
                 key={item.name}
                 to={item.path}
                 onClick={handleNavClick}
-                className={`font-medium transition-colors hover:text-primary ${
-                  isActive(item.path) 
-                    ? 'text-primary border-b-2 border-primary pb-1' 
+                className={`font-medium transition-colors hover:text-primary ${isActive(item.path)
+                    ? 'text-primary border-b-2 border-primary pb-1'
                     : 'text-gray-700'
-                }`}
+                  }`}
               >
                 {item.name}
               </Link>
@@ -99,9 +98,8 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`block py-2 font-medium transition-colors ${
-                  isActive(item.path) ? 'text-primary' : 'text-gray-700'
-                }`}
+                className={`block py-2 font-medium transition-colors ${isActive(item.path) ? 'text-primary' : 'text-gray-700'
+                  }`}
                 onClick={handleNavClick}
               >
                 {item.name}

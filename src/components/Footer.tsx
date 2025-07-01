@@ -87,6 +87,8 @@ const Footer = () => {
           <p className="text-gray-400">
             © 2024 Naturals Beauty Salon, Thanjavur. All rights reserved.
           </p>
+          <Link to="https://discovertechnologies.co/">
+          <p className="text-gray-400">Website created by ARA Discover Technologies - A unit of ARA Discoveries Pvt. Ltd.</p></Link>
         </div>
       </div>
     </footer>

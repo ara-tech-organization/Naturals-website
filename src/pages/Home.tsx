@@ -109,7 +109,7 @@ const Home = () => {
                 data-aos="count-up"
                 data-aos-delay={index * 200}
               >
-                <div className="text-5xl md:text-6xl font-bold mb-4 group-hover:scale-110 transition-transform">
+                <div className="text-4xl md:text-6xl font-bold mb-4 group-hover:scale-110 transition-transform">
                   {stat.number}
                 </div>
                 <div className="text-xl text-purple-100">{stat.label}</div>
@@ -285,7 +285,7 @@ const Home = () => {
             <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-4 text-lg">
               Book Appointment Now
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-4 text-lg">
+            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-4 text-lg">
               <Phone className="h-5 w-5 mr-2" />
               Call: +91 98765 43210
             </Button>

@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+@media (max-width: 575px)  {
+  .primary-header{
+    display: none;
+  }
+}
