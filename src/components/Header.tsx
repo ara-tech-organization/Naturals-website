@@ -18,6 +18,15 @@ const Header = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
+  const handleNavClick = () => {
+    // Scroll to top when navigation link is clicked
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       {/* Top Bar */}
@@ -43,7 +52,7 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2" onClick={handleNavClick}>
             <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-xl">N</span>
             </div>
@@ -59,6 +68,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.path}
+                onClick={handleNavClick}
                 className={`font-medium transition-colors hover:text-primary ${
                   isActive(item.path) 
                     ? 'text-primary border-b-2 border-primary pb-1' 
@@ -92,7 +102,7 @@ const Header = () => {
                 className={`block py-2 font-medium transition-colors ${
                   isActive(item.path) ? 'text-primary' : 'text-gray-700'
                 }`}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={handleNavClick}
               >
                 {item.name}
               </Link>

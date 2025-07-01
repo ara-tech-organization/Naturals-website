@@ -1,9 +1,21 @@
-
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, Phone, Clock, Car, Navigation, Star } from 'lucide-react';
+import { useEffect } from 'react';
+import AOS from 'aos';
 
 const Location = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: false,
+      mirror: true,
+      offset: 100
+    });
+    AOS.refresh();
+  }, []);
+
   const branches = [
     {
       name: "Naturals Main Branch",
@@ -112,16 +124,24 @@ const Location = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-bg text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Our Locations in Thanjavur</h1>
-            <p className="text-xl text-purple-100 mb-8">
+      <section 
+        className="relative h-screen bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center text-center text-white">
+          <div className="max-w-4xl mx-auto px-4" data-aos="fade-up">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6">Our Locations in Thanjavur</h1>
+            <p className="text-2xl md:text-3xl mb-8 text-purple-100">
               Five convenient locations across Thanjavur to serve you better
             </p>
-            <p className="text-lg text-purple-200">
+            <p className="text-lg text-purple-200 mb-8">
               Visit any of our premium branches for exceptional beauty and wellness services
             </p>
+            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
+              Find Nearest Branch
+            </Button>
           </div>
         </div>
       </section>
@@ -129,7 +149,7 @@ const Location = () => {
       {/* Branch Locations Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12" data-aos="fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Branch Network</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Strategically located across Thanjavur for your convenience. Each branch offers unique services tailored to the local community.
@@ -138,7 +158,12 @@ const Location = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             {branches.map((branch, index) => (
-              <Card key={index} className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <Card 
+                key={index} 
+                className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow group hover:scale-105 duration-300"
+                data-aos="slide-up"
+                data-aos-delay={index * 100}
+              >
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2">{branch.name}</h3>
@@ -206,7 +231,7 @@ const Location = () => {
       {/* Area Coverage Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12" data-aos="fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Areas We Serve</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Comprehensive coverage across Thanjavur with branches in key areas
@@ -215,7 +240,12 @@ const Location = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {cityAreas.map((area, index) => (
-              <Card key={index} className="p-6 text-center border-0 shadow-lg">
+              <Card 
+                key={index} 
+                className="p-6 text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                data-aos="zoom-in"
+                data-aos-delay={index * 100}
+              >
                 <h3 className="text-lg font-semibold mb-2 text-gray-900">{area.area}</h3>
                 <p className="text-2xl font-bold text-primary mb-2">{area.branches}</p>
                 <p className="text-sm text-gray-600 mb-4">Branch{area.branches > 1 ? 'es' : ''}</p>
@@ -229,7 +259,7 @@ const Location = () => {
       {/* Transport & Accessibility Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12" data-aos="fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">How to Reach Us</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Multiple transportation options to visit our branches conveniently
@@ -238,7 +268,12 @@ const Location = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {transportInfo.map((transport, index) => (
-              <Card key={index} className="p-6 text-center border-0 shadow-lg">
+              <Card 
+                key={index} 
+                className="p-6 text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                data-aos="flip-up"
+                data-aos-delay={index * 100}
+              >
                 <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
                   <Navigation className="h-6 w-6 text-white" />
                 </div>
@@ -253,7 +288,7 @@ const Location = () => {
       {/* Interactive Map Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12" data-aos="fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Find Us on Map</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Interactive map showing all our branch locations in Thanjavur
@@ -261,7 +296,7 @@ const Location = () => {
           </div>
           
           {/* Map Placeholder */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="zoom-in">
             <div className="h-96 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
               <div className="text-center">
                 <MapPin className="h-16 w-16 text-primary mx-auto mb-4" />
@@ -283,7 +318,7 @@ const Location = () => {
       {/* Visit Planning Section */}
       <section className="py-16 gradient-bg text-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12" data-aos="fade-up">
             <h2 className="text-4xl font-bold mb-4">Plan Your Visit</h2>
             <p className="text-lg text-purple-100 max-w-2xl mx-auto">
               Choose the most convenient branch and book your appointment today
@@ -291,7 +326,7 @@ const Location = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-6 bg-white text-gray-900 border-0">
+            <Card className="p-6 bg-white text-gray-900 border-0" data-aos="slide-right">
               <div className="text-center">
                 <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
                   <MapPin className="h-6 w-6 text-white" />
@@ -301,7 +336,7 @@ const Location = () => {
               </div>
             </Card>
             
-            <Card className="p-6 bg-white text-gray-900 border-0">
+            <Card className="p-6 bg-white text-gray-900 border-0" data-aos="slide-up">
               <div className="text-center">
                 <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
                   <Phone className="h-6 w-6 text-white" />
@@ -311,7 +346,7 @@ const Location = () => {
               </div>
             </Card>
             
-            <Card className="p-6 bg-white text-gray-900 border-0">
+            <Card className="p-6 bg-white text-gray-900 border-0" data-aos="slide-left">
               <div className="text-center">
                 <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
                   <Star className="h-6 w-6 text-white" />
@@ -322,7 +357,7 @@ const Location = () => {
             </Card>
           </div>
           
-          <div className="text-center mt-12">
+          <div className="text-center mt-12" data-aos="fade-up">
             <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3 mr-4">
               Book Appointment Now
             </Button>

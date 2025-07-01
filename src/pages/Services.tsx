@@ -1,308 +1,347 @@
 
-import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Scissors, Sparkles, Heart, Crown, User, Palette, Zap, Shield } from 'lucide-react';
+import { Clock, Star, Users, Award, Scissors, Sparkles, Heart, Zap } from 'lucide-react';
+import { useEffect } from 'react';
+import AOS from 'aos';
 
 const Services = () => {
-  const [activeTab, setActiveTab] = useState('women');
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: false,
+      mirror: true,
+      offset: 100
+    });
+    AOS.refresh();
+  }, []);
 
   const womenServices = [
     {
-      category: "Hair Care & Styling",
-      icon: <Scissors className="h-8 w-8 text-primary" />,
-      services: [
-        { name: "Hair Cut & Styling", price: "₹500 - ₹1,500", duration: "60 mins" },
-        { name: "Hair Coloring", price: "₹1,200 - ₹3,000", duration: "120 mins" },
-        { name: "Hair Spa Treatment", price: "₹800 - ₹1,200", duration: "90 mins" },
-        { name: "Keratin Treatment", price: "₹3,000 - ₹5,000", duration: "180 mins" },
-        { name: "Bridal Hair Styling", price: "₹2,000 - ₹4,000", duration: "150 mins" }
-      ]
+      name: "Hair Care & Styling",
+      description: "Professional hair treatments, cuts, coloring, and styling for all hair types",
+      price: "₹500 - ₹3000",
+      duration: "1-3 hours",
+      icon: Scissors,
+      popular: true
     },
     {
-      category: "Skin Care & Facials",
-      icon: <Sparkles className="h-8 w-8 text-primary" />,
-      services: [
-        { name: "Classic Facial", price: "₹800 - ₹1,200", duration: "75 mins" },
-        { name: "Anti-Aging Facial", price: "₹1,500 - ₹2,500", duration: "90 mins" },
-        { name: "Hydrating Facial", price: "₹1,000 - ₹1,800", duration: "80 mins" },
-        { name: "Acne Treatment", price: "₹1,200 - ₹2,000", duration: "85 mins" },
-        { name: "Brightening Facial", price: "₹1,100 - ₹1,900", duration: "80 mins" }
-      ]
+      name: "Bridal Packages",
+      description: "Complete bridal makeover including hair, makeup, and pre-bridal treatments",
+      price: "₹8000 - ₹25000",
+      duration: "4-6 hours",
+      icon: Heart,
+      popular: true
     },
     {
-      category: "Spa & Wellness",
-      icon: <Heart className="h-8 w-8 text-primary" />,
-      services: [
-        { name: "Full Body Massage", price: "₹1,800 - ₹3,000", duration: "90 mins" },
-        { name: "Aromatherapy", price: "₹2,000 - ₹3,500", duration: "100 mins" },
-        { name: "Body Polishing", price: "₹1,500 - ₹2,500", duration: "120 mins" },
-        { name: "Reflexology", price: "₹1,200 - ₹2,000", duration: "60 mins" },
-        { name: "Hot Stone Therapy", price: "₹2,500 - ₹4,000", duration: "110 mins" }
-      ]
+      name: "Facial & Skin Care",
+      description: "Deep cleansing facials, anti-aging treatments, and skin rejuvenation",
+      price: "₹800 - ₹2500",
+      duration: "45-90 minutes",
+      icon: Sparkles,
+      popular: false
     },
     {
-      category: "Bridal Packages",
-      icon: <Crown className="h-8 w-8 text-primary" />,
-      services: [
-        { name: "Pre-Bridal Package", price: "₹8,000 - ₹15,000", duration: "Multiple sessions" },
-        { name: "Bridal Makeup", price: "₹3,000 - ₹8,000", duration: "180 mins" },
-        { name: "Bridal Hair & Makeup", price: "₹5,000 - ₹12,000", duration: "240 mins" },
-        { name: "Mehendi Design", price: "₹500 - ₹2,000", duration: "120 mins" },
-        { name: "Complete Bridal Package", price: "₹15,000 - ₹25,000", duration: "Full day" }
-      ]
+      name: "Spa & Wellness",
+      description: "Full body massage, aromatherapy, and relaxation treatments",
+      price: "₹1200 - ₹4000",
+      duration: "1-2 hours",
+      icon: Zap,
+      popular: false
+    },
+    {
+      name: "Nail Art & Manicure",
+      description: "Creative nail designs, manicure, pedicure, and nail extensions",
+      price: "₹300 - ₹1500",
+      duration: "30-60 minutes",
+      icon: Star,
+      popular: false
+    },
+    {
+      name: "Makeup & Beauty",
+      description: "Professional makeup for parties, events, and special occasions",
+      price: "₹1000 - ₹5000",
+      duration: "1-2 hours",
+      icon: Award,
+      popular: true
     }
   ];
 
   const menServices = [
     {
-      category: "Hair Care & Styling",
-      icon: <Scissors className="h-8 w-8 text-primary" />,
-      services: [
-        { name: "Hair Cut & Styling", price: "₹300 - ₹800", duration: "45 mins" },
-        { name: "Hair Wash & Conditioning", price: "₹200 - ₹400", duration: "30 mins" },
-        { name: "Hair Coloring", price: "₹800 - ₹2,000", duration: "90 mins" },
-        { name: "Hair Spa Treatment", price: "₹600 - ₹1,000", duration: "60 mins" },
-        { name: "Dandruff Treatment", price: "₹500 - ₹900", duration: "50 mins" }
-      ]
+      name: "Haircut & Styling",
+      description: "Modern haircuts, beard trimming, and professional styling",
+      price: "₹200 - ₹800",
+      duration: "30-45 minutes",
+      icon: Scissors,
+      popular: true
     },
     {
-      category: "Beard & Mustache",
-      icon: <User className="h-8 w-8 text-primary" />,
-      services: [
-        { name: "Beard Trimming", price: "₹200 - ₹500", duration: "30 mins" },
-        { name: "Mustache Styling", price: "₹150 - ₹300", duration: "20 mins" },
-        { name: "Beard Oil Treatment", price: "₹300 - ₹600", duration: "40 mins" },
-        { name: "Full Shave", price: "₹250 - ₹500", duration: "35 mins" },
-        { name: "Beard & Mustache Combo", price: "₹400 - ₹800", duration: "50 mins" }
-      ]
+      name: "Beard & Mustache",
+      description: "Professional beard shaping, mustache grooming, and maintenance",
+      price: "₹150 - ₹500",
+      duration: "20-30 minutes",
+      icon: Users,
+      popular: true
     },
     {
-      category: "Skin Care",
-      icon: <Palette className="h-8 w-8 text-primary" />,
-      services: [
-        { name: "Men's Facial", price: "₹600 - ₹1,200", duration: "60 mins" },
-        { name: "Anti-Tan Treatment", price: "₹800 - ₹1,500", duration: "70 mins" },
-        { name: "Acne Treatment", price: "₹900 - ₹1,600", duration: "65 mins" },
-        { name: "Brightening Facial", price: "₹700 - ₹1,300", duration: "65 mins" },
-        { name: "Hydrating Treatment", price: "₹650 - ₹1,100", duration: "55 mins" }
-      ]
+      name: "Facial Treatments",
+      description: "Deep cleansing facials, blackhead removal, and skin care",
+      price: "₹400 - ₹1200",
+      duration: "45-60 minutes",
+      icon: Sparkles,
+      popular: false
     },
     {
-      category: "Wellness & Massage",
-      icon: <Zap className="h-8 w-8 text-primary" />,
-      services: [
-        { name: "Head & Shoulder Massage", price: "₹800 - ₹1,500", duration: "60 mins" },
-        { name: "Full Body Massage", price: "₹1,500 - ₹2,500", duration: "90 mins" },
-        { name: "Sports Massage", price: "₹1,200 - ₹2,000", duration: "75 mins" },
-        { name: "Stress Relief Package", price: "₹2,000 - ₹3,000", duration: "120 mins" },
-        { name: "Executive Grooming", price: "₹1,800 - ₹3,500", duration: "150 mins" }
-      ]
-    }
-  ];
-
-  const specialPackages = [
-    {
-      title: "Couple's Spa Package",
-      description: "Relaxing spa experience for couples",
-      price: "₹5,000 - ₹8,000",
-      duration: "180 mins",
-      icon: <Heart className="h-6 w-6 text-primary" />
+      name: "Hair Treatments",
+      description: "Hair spa, dandruff treatment, and hair strengthening therapy",
+      price: "₹600 - ₹2000",
+      duration: "60-90 minutes",
+      icon: Zap,
+      popular: false
     },
     {
-      title: "Mother & Daughter Package",
-      description: "Special bonding experience with beauty treatments",
-      price: "₹3,500 - ₹6,000",
-      duration: "150 mins",
-      icon: <Crown className="h-6 w-6 text-primary" />
+      name: "Body Grooming",
+      description: "Full body grooming, waxing, and personal care services",
+      price: "₹800 - ₹2500",
+      duration: "1-2 hours",
+      icon: Award,
+      popular: false
     },
     {
-      title: "Corporate Grooming",
-      description: "Professional grooming services for executives",
-      price: "₹2,500 - ₹4,500",
-      duration: "120 mins",
-      icon: <Shield className="h-6 w-6 text-primary" />
+      name: "Spa Services",
+      description: "Relaxing massage, stress relief, and wellness treatments",
+      price: "₹1000 - ₹3000",
+      duration: "1-1.5 hours",
+      icon: Star,
+      popular: true
     }
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-bg text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Our Premium Services</h1>
-            <p className="text-xl text-purple-100 mb-8">
-              Comprehensive beauty and wellness solutions for men and women
+      <section 
+        className="relative h-screen bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center text-center text-white">
+          <div className="max-w-4xl mx-auto px-4" data-aos="fade-up">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6">Our Services</h1>
+            <p className="text-2xl md:text-3xl mb-8 text-purple-100">
+              Premium Beauty Solutions for Everyone
             </p>
-            <p className="text-lg text-purple-200">
-              Experience luxury treatments with our expert professionals using premium products and latest techniques
-            </p>
+            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
+              Explore Services
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16 bg-white">
+      {/* Women Services Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <div className="flex justify-center mb-12">
-              <TabsList className="grid w-full max-w-md grid-cols-2 bg-gray-100">
-                <TabsTrigger value="women" className="text-lg font-semibold">
-                  Women's Services
-                </TabsTrigger>
-                <TabsTrigger value="men" className="text-lg font-semibold">
-                  Men's Services
-                </TabsTrigger>
-              </TabsList>
-            </div>
-
-            <TabsContent value="women" className="space-y-12">
-              {womenServices.map((category, index) => (
-                <div key={index} className="space-y-6">
-                  <div className="text-center">
-                    <div className="flex justify-center mb-4">
-                      {category.icon}
-                    </div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.category}</h2>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {category.services.map((service, serviceIndex) => (
-                      <Card key={serviceIndex} className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
-                        <h3 className="text-xl font-semibold mb-3 text-gray-900">{service.name}</h3>
-                        <div className="space-y-2 mb-4">
-                          <p className="text-primary font-semibold text-lg">{service.price}</p>
-                          <p className="text-gray-600">Duration: {service.duration}</p>
-                        </div>
-                        <Button className="w-full gradient-bg text-white hover:opacity-90">
-                          Book Now
-                        </Button>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </TabsContent>
-
-            <TabsContent value="men" className="space-y-12">
-              {menServices.map((category, index) => (
-                <div key={index} className="space-y-6">
-                  <div className="text-center">
-                    <div className="flex justify-center mb-4">
-                      {category.icon}
-                    </div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.category}</h2>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {category.services.map((service, serviceIndex) => (
-                      <Card key={serviceIndex} className="p-6 border-0 shadow-lg hover:shadow-xl transition-shadow">
-                        <h3 className="text-xl font-semibold mb-3 text-gray-900">{service.name}</h3>
-                        <div className="space-y-2 mb-4">
-                          <p className="text-primary font-semibold text-lg">{service.price}</p>
-                          <p className="text-gray-600">Duration: {service.duration}</p>
-                        </div>
-                        <Button className="w-full gradient-bg text-white hover:opacity-90">
-                          Book Now
-                        </Button>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-
-      {/* Special Packages Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Special Packages</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Exclusive packages designed for special occasions and unique experiences
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">Women's Services</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover our comprehensive range of beauty and wellness services designed specifically for women
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {specialPackages.map((pkg, index) => (
-              <Card key={index} className="p-8 text-center border-0 shadow-lg hover:shadow-xl transition-shadow">
-                <div className="flex justify-center mb-4">
-                  {pkg.icon}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {womenServices.map((service, index) => (
+              <Card 
+                key={index} 
+                className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 cursor-pointer"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+              >
+                <div className="p-8">
+                  {service.popular && (
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      Popular
+                    </div>
+                  )}
+                  
+                  <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <service.icon className="h-8 w-8 text-white" />
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
+                    {service.name}
+                  </h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center space-x-2">
+                      <Star className="h-4 w-4 text-yellow-400" />
+                      <span className="text-sm font-semibold text-gray-700">{service.price}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Clock className="h-4 w-4 text-primary" />
+                      <span className="text-sm text-gray-600">{service.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <Button className="w-full gradient-bg text-white hover:opacity-90 group-hover:scale-105 transition-transform">
+                    Book Now
+                  </Button>
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-900">{pkg.title}</h3>
-                <p className="text-gray-600 mb-4">{pkg.description}</p>
-                <div className="space-y-2 mb-6">
-                  <p className="text-primary font-semibold text-lg">{pkg.price}</p>
-                  <p className="text-gray-600">Duration: {pkg.duration}</p>
-                </div>
-                <Button className="w-full gradient-bg text-white hover:opacity-90">
-                  Book Package
-                </Button>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Our Services Section */}
-      <section className="py-16 gradient-bg text-white">
+      {/* Men Services Section */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Why Choose Our Services?</h2>
-            <p className="text-lg text-purple-100 max-w-2xl mx-auto">
-              Experience the difference with our premium services and expert care
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">Men's Services</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Professional grooming and styling services tailored for the modern man
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Certified Professionals</h3>
-              <p className="text-purple-200">Trained and certified beauticians with years of experience</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Premium Products</h3>
-              <p className="text-purple-200">Only the finest, internationally acclaimed beauty products</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Personalized Care</h3>
-              <p className="text-purple-200">Customized treatments based on your unique needs</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Latest Technology</h3>
-              <p className="text-purple-200">Modern equipment and advanced treatment techniques</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {menServices.map((service, index) => (
+              <Card 
+                key={index} 
+                className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 cursor-pointer"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+              >
+                <div className="p-8">
+                  {service.popular && (
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      Popular
+                    </div>
+                  )}
+                  
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <service.icon className="h-8 w-8 text-white" />
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                    {service.name}
+                  </h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center space-x-2">
+                      <Star className="h-4 w-4 text-yellow-400" />
+                      <span className="text-sm font-semibold text-gray-700">{service.price}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Clock className="h-4 w-4 text-blue-500" />
+                      <span className="text-sm text-gray-600">{service.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <Button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:opacity-90 group-hover:scale-105 transition-transform">
+                    Book Now
+                  </Button>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Ready to Book Your Service?</h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Contact us today to schedule your appointment and experience the best beauty and wellness services in Thanjavur
+      {/* Special Packages Section */}
+      <section className="py-20 gradient-bg text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-5xl font-bold mb-6">Special Packages</h2>
+            <p className="text-xl text-purple-100 max-w-3xl mx-auto">
+              Exclusive combo packages designed to give you the complete makeover experience
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="bg-white text-gray-900 border-0 overflow-hidden" data-aos="flip-left">
+              <div className="p-8 text-center">
+                <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Heart className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Bridal Bliss</h3>
+                <p className="text-gray-600 mb-6">Complete bridal package with pre-bridal treatments, makeup, and styling</p>
+                <div className="text-3xl font-bold text-primary mb-6">₹15,000</div>
+                <Button className="w-full gradient-bg text-white">Book Package</Button>
+              </div>
+            </Card>
+            
+            <Card className="bg-white text-gray-900 border-0 overflow-hidden" data-aos="flip-up">
+              <div className="p-8 text-center">
+                <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Sparkles className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Glow Up</h3>
+                <p className="text-gray-600 mb-6">Hair treatment, facial, manicure, and pedicure combo package</p>
+                <div className="text-3xl font-bold text-primary mb-6">₹3,500</div>
+                <Button className="w-full gradient-bg text-white">Book Package</Button>
+              </div>
+            </Card>
+            
+            <Card className="bg-white text-gray-900 border-0 overflow-hidden" data-aos="flip-right">
+              <div className="p-8 text-center">
+                <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Users className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Gentlemen's Club</h3>
+                <p className="text-gray-600 mb-6">Complete men's grooming with haircut, beard styling, and facial</p>
+                <div className="text-3xl font-bold text-primary mb-6">₹1,200</div>
+                <Button className="w-full gradient-bg text-white">Book Package</Button>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">Why Choose Naturals?</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Experience the difference with our expert professionals and premium services
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: Award, title: "Expert Professionals", desc: "Certified stylists and beauticians" },
+              { icon: Star, title: "Premium Products", desc: "High-quality international brands" },
+              { icon: Clock, title: "Flexible Timings", desc: "Open 7 days a week for your convenience" },
+              { icon: Users, title: "Personalized Care", desc: "Customized treatments for every client" }
+            ].map((item, index) => (
+              <div key={index} className="text-center group" data-aos="zoom-in" data-aos-delay={index * 100}>
+                <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                  <item.icon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 gradient-bg text-white">
+        <div className="container mx-auto px-4 text-center" data-aos="fade-up">
+          <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Look?</h2>
+          <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+            Book your appointment today and experience the best beauty services in Thanjavur
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gradient-bg text-white hover:opacity-90 px-8 py-3">
+            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
               Book Appointment
             </Button>
-            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-3">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-3">
               Call Now: +91 98765 43210
             </Button>
           </div>

@@ -1,14 +1,24 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { MapPin, Phone, Mail, Clock, MessageCircle, Users, Calendar, Star } from 'lucide-react';
+import AOS from 'aos';
 
 const Contact = () => {
-  const { toast } = useToast();
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: false,
+      mirror: true,
+      offset: 100
+    });
+    AOS.refresh();
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,125 +27,107 @@ const Contact = () => {
     message: ''
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you soon!",
-    });
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
-  };
-
   const contactInfo = [
     {
-      icon: <MapPin className="h-6 w-6 text-primary" />,
-      title: "Main Branch Address",
-      details: [
-        "123 Big Street, Thanjavur - 613001",
-        "Near Central Bus Stand",
-        "Tamil Nadu, India"
-      ]
+      icon: Phone,
+      title: "Call Us",
+      info: "+91 98765 43210",
+      desc: "Available 9 AM - 8 PM"
     },
     {
-      icon: <Phone className="h-6 w-6 text-primary" />,
-      title: "Phone Numbers",
-      details: [
-        "+91 98765 43210 (Main)",
-        "+91 87654 32109 (Appointments)",
-        "+91 76543 21098 (Emergencies)"
-      ]
+      icon: Mail,
+      title: "Email Us",
+      info: "info@naturals-thanjavur.com",
+      desc: "We'll respond within 24 hours"
     },
     {
-      icon: <Mail className="h-6 w-6 text-primary" />,
-      title: "Email Addresses",
-      details: [
-        "info@naturals-thanjavur.com",
-        "appointments@naturals-thanjavur.com",
-        "support@naturals-thanjavur.com"
-      ]
+      icon: MapPin,
+      title: "Visit Us",
+      info: "123 Big Street, Thanjavur",
+      desc: "5 branches across the city"
     },
     {
-      icon: <Clock className="h-6 w-6 text-primary" />,
+      icon: Clock,
       title: "Working Hours",
-      details: [
-        "Monday - Saturday: 9:00 AM - 8:00 PM",
-        "Sunday: 10:00 AM - 6:00 PM",
-        "Public Holidays: 10:00 AM - 4:00 PM"
-      ]
+      info: "Mon - Sat: 9 AM - 8 PM",
+      desc: "Sunday: 10 AM - 6 PM"
     }
   ];
 
-  const faqs = [
+  const faqData = [
     {
       question: "How do I book an appointment?",
-      answer: "You can book an appointment by calling us, visiting our branch, or using our online booking system. We recommend booking in advance to ensure your preferred time slot."
+      answer: "You can book by calling us, using our online form, or visiting any of our branches directly."
     },
     {
-      question: "What safety measures do you follow?",
-      answer: "We follow strict hygiene protocols including sanitization of all equipment, use of disposable items where possible, and maintaining clean, sterile environments for all treatments."
-    },
-    {
-      question: "Do you offer bridal packages?",
-      answer: "Yes, we offer comprehensive bridal packages including pre-bridal treatments, wedding day makeup and hair styling, and post-wedding care. Contact us for customized packages."
+      question: "Do you accept walk-ins?",
+      answer: "Yes, we accept walk-ins based on availability. However, we recommend booking in advance."
     },
     {
       question: "What payment methods do you accept?",
-      answer: "We accept cash, credit/debit cards, UPI, and all major digital payment methods. We also offer EMI options for expensive treatments and packages."
+      answer: "We accept cash, UPI, credit/debit cards, and digital wallets."
+    },
+    {
+      question: "Do you offer bridal packages?",
+      answer: "Yes, we offer comprehensive bridal packages including pre-bridal treatments and makeup."
     }
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-bg text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Contact Us</h1>
-            <p className="text-xl text-purple-100 mb-8">
-              Get in touch with Naturals Thanjavur for all your beauty and wellness needs
+      <section 
+        className="relative h-screen bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)'
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center text-center text-white">
+          <div className="max-w-4xl mx-auto px-4" data-aos="fade-up">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6">Get In Touch</h1>
+            <p className="text-2xl md:text-3xl mb-8 text-purple-100">
+              We're Here to Make You Beautiful
             </p>
-            <p className="text-lg text-purple-200">
-              We're here to help you look and feel your best. Reach out to us for appointments, queries, or feedback.
-            </p>
+            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
+              Contact Us Now
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Contact Information Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Contact Cards Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Multiple ways to reach us and visit our premium beauty salon in Thanjavur
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">Contact Information</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Multiple ways to reach us for your convenience
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactInfo.map((info, index) => (
-              <Card key={index} className="p-6 text-center border-0 shadow-lg hover:shadow-xl transition-shadow">
-                <div className="flex justify-center mb-4">
-                  {info.icon}
+            {contactInfo.map((item, index) => (
+              <Card 
+                key={index} 
+                className="group p-8 text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 cursor-pointer"
+                data-aos="flip-up"
+                data-aos-delay={index * 100}
+              >
+                <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                  <item.icon className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold mb-4 text-gray-900">{info.title}</h3>
-                <div className="space-y-2">
-                  {info.details.map((detail, detailIndex) => (
-                    <p key={detailIndex} className="text-gray-600 text-sm">{detail}</p>
-                  ))}
-                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-lg font-semibold text-primary mb-2">{item.info}</p>
+                <p className="text-gray-600">{item.desc}</p>
               </Card>
             ))}
           </div>
@@ -143,201 +135,189 @@ const Contact = () => {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+            {/* Form */}
+            <div data-aos="slide-right">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
               <p className="text-gray-600 mb-8">
-                Fill out the form below and we'll get back to you as soon as possible. 
-                Let us know how we can help you with your beauty and wellness needs.
+                Fill out the form below and we'll get back to you as soon as possible.
               </p>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card className="p-8 border-0 shadow-lg">
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                      <Input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Enter your full name"
+                        className="border-gray-300 focus:border-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                      <Input
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Enter your email"
+                        className="border-gray-300 focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                      <Input
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="Enter your phone number"
+                        className="border-gray-300 focus:border-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Service Interest</label>
+                      <select 
+                        name="service"
+                        value={formData.service}
+                        onChange={handleInputChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
+                      >
+                        <option value="">Select a service</option>
+                        <option value="hair">Hair Care & Styling</option>
+                        <option value="bridal">Bridal Package</option>
+                        <option value="facial">Facial & Skin Care</option>
+                        <option value="spa">Spa & Wellness</option>
+                        <option value="men">Men's Grooming</option>
+                      </select>
+                    </div>
+                  </div>
+                  
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                    <Input
-                      type="text"
-                      name="name"
-                      value={formData.name}
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                    <Textarea
+                      name="message"
+                      value={formData.message}
                       onChange={handleInputChange}
-                      placeholder="Enter your full name"
-                      required
-                      className="w-full"
+                      placeholder="Tell us about your requirements..."
+                      rows={4}
+                      className="border-gray-300 focus:border-primary"
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                    <Input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="Enter your phone number"
-                      required
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                  <Input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email address"
-                    required
-                    className="w-full"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Service Interest</label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleInputChange}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="hair-care">Hair Care & Styling</option>
-                    <option value="skin-care">Skin Care & Facials</option>
-                    <option value="spa-wellness">Spa & Wellness</option>
-                    <option value="bridal-package">Bridal Package</option>
-                    <option value="mens-grooming">Men's Grooming</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
-                  <Textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Tell us about your requirements or any questions you have..."
-                    required
-                    rows={5}
-                    className="w-full"
-                  />
-                </div>
-                
-                <Button type="submit" size="lg" className="w-full gradient-bg text-white hover:opacity-90">
-                  <Send className="mr-2 h-5 w-5" />
-                  Send Message
-                </Button>
-              </form>
+                  
+                  <Button className="w-full gradient-bg text-white hover:opacity-90 py-3">
+                    Send Message
+                  </Button>
+                </form>
+              </Card>
             </div>
 
-            {/* Map and Additional Info */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Find Us</h2>
+            {/* Info Cards */}
+            <div className="space-y-8" data-aos="slide-left">
+              <h2 className="text-4xl font-bold text-gray-900">Why Choose Us?</h2>
               
-              {/* Map Placeholder */}
-              <div className="bg-gray-200 rounded-lg h-64 mb-6 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-primary mx-auto mb-2" />
-                  <p className="text-gray-600">Interactive Map</p>
-                  <p className="text-sm text-gray-500">123 Big Street, Thanjavur</p>
-                </div>
+              <div className="space-y-6">
+                <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center flex-shrink-0">
+                      <Star className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">Expert Professionals</h3>
+                      <p className="text-gray-600">Our certified stylists and beauticians have years of experience in the industry.</p>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center flex-shrink-0">
+                      <Users className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">Personalized Service</h3>
+                      <p className="text-gray-600">We customize our treatments according to your specific needs and preferences.</p>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card className="p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center flex-shrink-0">
+                      <Calendar className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">Flexible Scheduling</h3>
+                      <p className="text-gray-600">Book appointments at your convenience with our flexible timing options.</p>
+                    </div>
+                  </div>
+                </Card>
               </div>
-              
-              {/* Quick Contact */}
-              <Card className="p-6 border-0 shadow-lg mb-6">
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 flex items-center">
-                  <MessageSquare className="mr-2 h-5 w-5 text-primary" />
-                  Quick Contact
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium">Call Now</span>
-                    <Button size="sm" className="gradient-bg text-white hover:opacity-90">
-                      +91 98765 43210
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium">WhatsApp</span>
-                    <Button size="sm" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                      Chat Now
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium">Email</span>
-                    <Button size="sm" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                      Send Email
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-
-              {/* Business Hours */}
-              <Card className="p-6 border-0 shadow-lg">
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 flex items-center">
-                  <Clock className="mr-2 h-5 w-5 text-primary" />
-                  Business Hours
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Monday - Friday</span>
-                    <span className="font-medium">9:00 AM - 8:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Saturday</span>
-                    <span className="font-medium">9:00 AM - 8:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Sunday</span>
-                    <span className="font-medium">10:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Public Holidays</span>
-                    <span className="font-medium">10:00 AM - 4:00 PM</span>
-                  </div>
-                </div>
-              </Card>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
+      {/* FAQ Section with Flip Cards */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Common questions and answers about our services and policies
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Quick answers to common questions about our services
             </p>
           </div>
           
-          <div className="max-w-4xl mx-auto space-y-6">
-            {faqs.map((faq, index) => (
-              <Card key={index} className="p-6 border-0 shadow-lg">
-                <h3 className="text-lg font-semibold mb-3 text-gray-900">{faq.question}</h3>
-                <p className="text-gray-600">{faq.answer}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {faqData.map((faq, index) => (
+              <Card 
+                key={index} 
+                className="group h-48 [perspective:1000px] cursor-pointer"
+                data-aos="zoom-in"
+                data-aos-delay={index * 100}
+              >
+                <div className="relative h-full w-full [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] transition-transform duration-700">
+                  {/* Front */}
+                  <div className="absolute inset-0 [backface-visibility:hidden] bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center p-6">
+                    <div className="text-center text-white">
+                      <MessageCircle className="h-12 w-12 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold">{faq.question}</h3>
+                    </div>
+                  </div>
+                  
+                  {/* Back */}
+                  <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-white border border-gray-200 rounded-lg flex items-center justify-center p-6">
+                    <div className="text-center">
+                      <p className="text-gray-700">{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Emergency Contact Section */}
-      <section className="py-16 gradient-bg text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Need Immediate Assistance?</h2>
-          <p className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto">
-            For urgent appointments or emergency situations, contact us directly. We're here to help you with immediate beauty and wellness needs.
+      {/* CTA Section */}
+      <section className="py-20 gradient-bg text-white">
+        <div className="container mx-auto px-4 text-center" data-aos="fade-up">
+          <h2 className="text-4xl font-bold mb-6">Ready to Book Your Appointment?</h2>
+          <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+            Contact us today and let our experts take care of your beauty needs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
-              Call Emergency Line: +91 76543 21098
+              Book Now
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-3">
-              WhatsApp Support
+              Call: +91 98765 43210
             </Button>
           </div>
         </div>
