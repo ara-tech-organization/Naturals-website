@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Scissors, Heart, Sparkles, Users, Star, Award, Clock, MapPin, Phone, ChevronRight } from 'lucide-react';
 import AOS from 'aos';
 import HeroCarousel from '@/components/HeroCarousel';
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
 
 const Home = () => {
   useEffect(() => {
@@ -19,11 +21,28 @@ const Home = () => {
   }, []);
 
   const services = [
-    { icon: Scissors, name: "Hair Styling", desc: "Professional cuts and styling" },
-    { icon: Heart, name: "Bridal Services", desc: "Complete bridal makeover" },
-    { icon: Sparkles, name: "Skin Care", desc: "Advanced facial treatments" },
-    { icon: Users, name: "Spa & Wellness", desc: "Relaxing body treatments" }
+    {
+      name: "Hair Styling",
+      desc: "Professional cuts and styling",
+      image: "/images/hairstyle.jpg",
+    },
+    {
+      name: "Bridal Services",
+      desc: "Complete bridal makeover",
+      image: "/images/makeup.jpeg",
+    },
+    {
+      name: "Skin Care",
+      desc: "Advanced facial treatments",
+      image: "/images/skincare.jpeg",
+    },
+    {
+      name: "Spa & Wellness",
+      desc: "Relaxing body treatments",
+      image: "/images/spa.jpeg",
+    },
   ];
+
 
   const testimonials = [
     {
@@ -47,10 +66,10 @@ const Home = () => {
   ];
 
   const stats = [
-    { number: "50,000+", label: "Happy Customers" },
-    { number: "15+", label: "Years Experience" },
-    { number: "5", label: "Branches" },
-    { number: "25+", label: "Expert Stylists" }
+    { number: 10000, label: "Happy Customers", suffix: "+" },
+    { number: 15, label: "Years Experience", suffix: "+" },
+    { number: 100, label: "Bridal Works",suffix:"+" },
+    { number: 25, label: "Expert Stylists", suffix: "+" }
   ];
 
   return (
@@ -64,28 +83,30 @@ const Home = () => {
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-5xl font-bold text-gray-900 mb-6">Welcome to Naturals Thanjavur</h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Experience the finest in beauty and wellness at Thanjavur's premier salon chain. 
-              With over 15 years of expertise and 5 convenient locations, we're your trusted partner 
+              Experience the finest in beauty and wellness at Thanjavur's premier salon chain.
+              With over 15 years of expertise, we're your trusted partner
               in looking and feeling your absolute best.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <Card 
-                key={index} 
-                className="group p-8 text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 cursor-pointer"
+              <div
+                key={index}
+                className="relative rounded-xl overflow-hidden shadow-lg transition-all duration-500 cursor-pointer h-[320px] group bg-cover bg-center"
+                style={{ backgroundImage: `url(${service.image})` }}
                 data-aos="zoom-in"
                 data-aos-delay={index * 100}
               >
-                <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                  <service.icon className="h-10 w-10 text-white" />
+                {/* Spotlight Overlay on hover */}
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/60 transition-all duration-500" />
+
+                {/* Centered Text */}
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 transition-all duration-500 opacity-0 group-hover:opacity-100">
+                  <h3 className="text-2xl font-bold text-white mb-3">{service.name}</h3>
+                  <p className="text-white text-sm">{service.desc}</p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
-                  {service.name}
-                </h3>
-                <p className="text-gray-600">{service.desc}</p>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
@@ -100,21 +121,36 @@ const Home = () => {
               Trusted by thousands of customers across Thanjavur
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div 
-                key={index} 
-                className="text-center group"
-                data-aos="count-up"
-                data-aos-delay={index * 200}
-              >
-                <div className="text-4xl md:text-6xl font-bold mb-4 group-hover:scale-110 transition-transform">
-                  {stat.number}
+            {stats.map((stat, index) => {
+              const { ref, inView } = useInView({
+                triggerOnce: true,
+                threshold: 0.5,
+              });
+
+              return (
+                <div
+                  key={index}
+                  ref={ref}
+                  className="text-center group"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 200}
+                >
+                  <div className="text-4xl md:text-6xl font-bold mb-4 group-hover:scale-110 transition-transform">
+                    {inView && (
+                      <CountUp
+                        start={0}
+                        end={stat.number}
+                        duration={2}
+                        suffix={stat.suffix || ''}
+                      />
+                    )}
+                  </div>
+                  <div className="text-xl text-purple-100">{stat.label}</div>
                 </div>
-                <div className="text-xl text-purple-100">{stat.label}</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -128,7 +164,7 @@ const Home = () => {
               Discover our comprehensive range of beauty and wellness services
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
@@ -139,7 +175,7 @@ const Home = () => {
               },
               {
                 title: "Men's Grooming Services",
-                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "./images/mens_grooming.jpeg",
                 services: ["Haircut & Styling", "Beard Grooming", "Facial Care", "Body Treatments"],
                 color: "from-blue-500 to-indigo-500"
               },
@@ -150,13 +186,13 @@ const Home = () => {
                 color: "from-green-500 to-teal-500"
               }
             ].map((category, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
                 data-aos="slide-up"
                 data-aos-delay={index * 200}
               >
-                <div 
+                <div
                   className="h-64 bg-cover bg-center relative"
                   style={{ backgroundImage: `url(${category.image})` }}
                 >
@@ -165,7 +201,7 @@ const Home = () => {
                     <h3 className="text-2xl font-bold text-white">{category.title}</h3>
                   </div>
                 </div>
-                
+
                 <div className="p-6">
                   <ul className="space-y-2 mb-6">
                     {category.services.map((service, serviceIndex) => (
@@ -194,11 +230,11 @@ const Home = () => {
               Real experiences from our valued customers
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="group h-80 [perspective:1000px] cursor-pointer"
                 data-aos="flip-left"
                 data-aos-delay={index * 200}
@@ -216,7 +252,7 @@ const Home = () => {
                       <p className="text-purple-100">{testimonial.service}</p>
                     </div>
                   </div>
-                  
+
                   {/* Back */}
                   <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-white border-2 border-purple-200 rounded-lg flex items-center justify-center p-6">
                     <div className="text-center">
@@ -233,42 +269,42 @@ const Home = () => {
       {/* Location Highlights */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Visit Our Branches</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Five convenient locations across Thanjavur for your comfort
+          <div className="text-center mb-12" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Visit Our Main Branch</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Conveniently located at Arulanthar Nagar, Thanjavur.
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { name: "Main Branch", area: "Big Street", landmark: "Near Central Bus Stand" },
-              { name: "Anna Nagar", area: "Anna Nagar", landmark: "Opposite Park" },
-              { name: "Medical College", area: "Medical College Road", landmark: "Near College" },
-              { name: "East Main", area: "East Main Street", landmark: "Near Big Temple" },
-              { name: "Gandhiji Road", area: "Gandhiji Road", landmark: "Near Collectorate" }
-            ].map((branch, index) => (
-              <Card 
-                key={index} 
-                className="p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
-                data-aos="zoom-in"
-                data-aos-delay={index * 100}
-              >
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <MapPin className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900">{branch.name}</h3>
-                    <p className="text-gray-600">{branch.area}</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 mb-4">{branch.landmark}</p>
-                <Button size="sm" className="gradient-bg text-white hover:opacity-90">
-                  Get Directions
-                </Button>
-              </Card>
-            ))}
+
+          {/* Branch Info Card */}
+          <div
+            className="max-w-2xl mx-auto p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group mb-12"
+            data-aos="zoom-in"
+          >
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                <MapPin className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">Naturals</h3>
+                <p className="text-gray-600">Arulanthar Nagar</p>
+              </div>
+            </div>
+            <p className="text-gray-600 mb-4">1st Floor, Philomena Shop, 2851/14, No 2, opposite Vinodhagan Hospital, Arulanthar Nagar, Thanjavur, Tamil Nadu 613007</p>
+            {/* <Button size="sm" className="gradient-bg text-white hover:opacity-90">
+              Get Directions
+            </Button> */}
+          </div>
+
+          {/* Full Width Map */}
+          <div className="w-full">
+            <iframe
+              className="w-full h-[400px] rounded-xl shadow-lg"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4931029823315!2d79.13116237596353!3d10.773494531878411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab9b069029cff%3A0x58f9279539ef68c4!2sNaturals%20unisex%20salon%20-%20Arulanthar%20nagar!5e0!3m2!1sen!2sin!4v1751542614741!5m2!1sen!2sin"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </section>
@@ -278,7 +314,7 @@ const Home = () => {
         <div className="container mx-auto px-4 text-center" data-aos="fade-up">
           <h2 className="text-5xl font-bold mb-6">Ready to Transform Your Look?</h2>
           <p className="text-xl text-purple-100 mb-8 max-w-3xl mx-auto">
-            Experience the best in beauty and wellness services at Naturals Thanjavur. 
+            Experience the best in beauty and wellness services at Naturals Thanjavur.
             Book your appointment today and discover why we're the city's favorite salon.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -287,7 +323,7 @@ const Home = () => {
             </Button>
             <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-4 text-lg">
               <Phone className="h-5 w-5 mr-2" />
-              Call: +91 98765 43210
+              Call: +91 90870 00049
             </Button>
           </div>
         </div>

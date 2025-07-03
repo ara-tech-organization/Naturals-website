@@ -38,20 +38,20 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call Us",
-      info: "+91 98765 43210",
+      info: "+91 90870 00049",
       desc: "Available 9 AM - 8 PM"
     },
     {
       icon: Mail,
       title: "Email Us",
-      info: "info@naturals-thanjavur.com",
+      info: "naturals.tj@gmail.com",
       desc: "We'll respond within 24 hours"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      info: "123 Big Street, Thanjavur",
-      desc: "5 branches across the city"
+      info: "Arulananda Nagar",
+      desc: "No 2851/14, No 2, 1st Floor, Philomena Shop,Arulananda Nagar,Thanjavur - 613007"
     },
     {
       icon: Clock,
@@ -265,6 +265,48 @@ const Contact = () => {
         </div>
       </section>
 
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Visit Our Main Branch</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Conveniently located at Arulanthar Nagar, Thanjavur.
+            </p>
+          </div>
+
+          {/* Branch Info Card */}
+          <div
+            className="max-w-2xl mx-auto p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group mb-12"
+            data-aos="zoom-in"
+          >
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                <MapPin className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">Naturals</h3>
+                <p className="text-gray-600">Arulanthar Nagar</p>
+              </div>
+            </div>
+            <p className="text-gray-600 mb-4">1st Floor, Philomena Shop, 2851/14, No 2, opposite Vinodhagan Hospital, Arulanthar Nagar, Thanjavur, Tamil Nadu 613007</p>
+            {/* <Button size="sm" className="gradient-bg text-white hover:opacity-90">
+              Get Directions
+            </Button> */}
+          </div>
+
+          {/* Full Width Map */}
+          <div className="w-full">
+            <iframe
+              className="w-full h-[400px] rounded-xl shadow-lg"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4931029823315!2d79.13116237596353!3d10.773494531878411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab9b069029cff%3A0x58f9279539ef68c4!2sNaturals%20unisex%20salon%20-%20Arulanthar%20nagar!5e0!3m2!1sen!2sin!4v1751542614741!5m2!1sen!2sin"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section with Flip Cards */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -317,7 +359,7 @@ const Contact = () => {
               Book Now
             </Button>
             <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-3">
-              Call: +91 98765 43210
+              Call: +91 90870 00049
             </Button>
           </div>
         </div>

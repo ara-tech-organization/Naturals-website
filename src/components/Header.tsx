@@ -1,48 +1,37 @@
-
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Mail } from 'lucide-react';
+import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showServicesSubmenu, setShowServicesSubmenu] = useState(false);
+  const [showPlansSubmenu, setShowPlansSubmenu] = useState(false);
   const location = useLocation();
-
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Bridal Packages', path: '/bridal-packages' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'Membership', path: '/membership' },
-    { name: 'Contact', path: '/contact' },
-    { name: 'Location', path: '/location' },
-  ];
 
   const isActive = (path: string) => location.pathname === path;
 
   const handleNavClick = () => {
-    // Scroll to top when navigation link is clicked
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsMenuOpen(false);
+    setShowServicesSubmenu(false);
+    setShowPlansSubmenu(false);
   };
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
+    <header className="bg-primary shadow-lg sticky top-0 z-50">
       {/* Top Bar */}
       <div className="bg-primary text-white py-2 hidden lg:block">
-        <div className="container mx-auto px-4 flex justify-between items-center text-sm primary-header">
+        <div className="container mx-auto px-4 flex justify-between items-center text-sm">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <Phone className="h-4 w-4" />
-              <span>+91 98765 43210</span>
+              <span>+91 90870 00049</span>
             </div>
             <div className="flex items-center space-x-1">
               <Mail className="h-4 w-4" />
-              <span>info@naturals-thanjavur.com</span>
+              <span>
+naturals.tj@gmail.com</span>
             </div>
           </div>
           <div className="hidden md:block">
@@ -52,62 +41,118 @@ const Header = () => {
       </div>
 
       {/* Main Navigation */}
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-4 py-4 bg-primary relative">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2" onClick={handleNavClick}>
-            <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">N</span>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-primary">Naturals</h1>
-              <p className="text-sm text-gray-600">Beauty & Wellness</p>
-            </div>
+          <Link to="/" onClick={handleNavClick}>
+            <img src="./images/logo.png" alt="Logo" width="150px" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                onClick={handleNavClick}
-                className={`font-medium transition-colors hover:text-primary ${isActive(item.path)
-                    ? 'text-primary border-b-2 border-primary pb-1'
-                    : 'text-gray-700'
-                  }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Button className="gradient-bg text-white hover:opacity-90">
+          <div className="hidden lg:flex items-center space-x-8 text-white relative">
+            <Link to="/" onClick={handleNavClick} className={`font-medium hover:text-white ${isActive('/') ? 'border-b-2 border-white pb-1' : ''}`}>
+              Home
+            </Link>
+            <Link to="/about" onClick={handleNavClick} className={`font-medium hover:text-white ${isActive('/about') ? 'border-b-2 border-white pb-1' : ''}`}>
+              About
+            </Link>
+            <Link to="/services" onClick={handleNavClick} className={`font-medium hover:text-white ${isActive('/services') ? 'border-b-2 border-white pb-1' : ''}`}>
+              Services
+            </Link>
+
+            {/* Services Dropdown */}
+            {/* <div className="relative group">
+              <button className="flex items-center font-medium hover:text-white focus:outline-none">
+                Services <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-md py-2 hidden group-hover:block z-20 min-w-[180px]">
+                <Link to="/services" onClick={handleNavClick} className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                  All Services
+                </Link>
+                <Link to="/bridal-packages" onClick={handleNavClick} className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                  Bridal Packages
+                </Link>
+              </div>
+            </div> */}
+
+            {/* Plans Dropdown (Pricing & Membership) */}
+            {/* <div className="relative group">
+              <button className="flex items-center font-medium hover:text-white focus:outline-none">
+                Plans <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-md py-2 hidden group-hover:block z-20 min-w-[180px]">
+                <Link to="/pricing" onClick={handleNavClick} className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                  Pricing
+                </Link>
+                <Link to="/membership" onClick={handleNavClick} className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                  Membership
+                </Link>
+              </div>
+            </div> */}
+
+            <Link to="/contact" onClick={handleNavClick} className={`font-medium hover:text-white ${isActive('/contact') ? 'border-b-2 border-white pb-1' : ''}`}>
+              Contact
+            </Link>
+            {/* <Link to="/location" onClick={handleNavClick} className={`font-medium hover:text-white ${isActive('/location') ? 'border-b-2 border-white pb-1' : ''}`}>
+              Location
+            </Link> */}
+
+            {/* <Button className="gradient-bg text-white hover:opacity-90">
               Book Appointment
-            </Button>
+            </Button> */}
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+          <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t pt-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`block py-2 font-medium transition-colors ${isActive(item.path) ? 'text-primary' : 'text-gray-700'
-                  }`}
-                onClick={handleNavClick}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <div className="lg:hidden mt-4 pb-4 border-t pt-4">
+            <Link to="/" className="block py-2" onClick={handleNavClick}>Home</Link>
+            <Link to="/about" className="block py-2" onClick={handleNavClick}>About</Link>
+
+            {/* Services Submenu Mobile */}
+            <button
+              className="block py-2 w-full text-left font-medium"
+              onClick={() => setShowServicesSubmenu(!showServicesSubmenu)}
+            >
+              Services
+            </button>
+            {showServicesSubmenu && (
+              <div className="pl-4">
+                <Link to="/services" className="block py-2" onClick={handleNavClick}>
+                  All Services
+                </Link>
+                <Link to="/bridal-packages" className="block py-2" onClick={handleNavClick}>
+                  Bridal Packages
+                </Link>
+              </div>
+            )}
+
+            {/* Plans Submenu Mobile */}
+            <button
+              className="block py-2 w-full text-left font-medium"
+              onClick={() => setShowPlansSubmenu(!showPlansSubmenu)}
+            >
+              Plans
+            </button>
+            {showPlansSubmenu && (
+              <div className="pl-4">
+                <Link to="/pricing" className="block py-2" onClick={handleNavClick}>
+                  Pricing
+                </Link>
+                <Link to="/membership" className="block py-2" onClick={handleNavClick}>
+                  Membership
+                </Link>
+              </div>
+            )}
+
+            <Link to="/contact" className="block py-2" onClick={handleNavClick}>Contact</Link>
+            <Link to="/location" className="block py-2" onClick={handleNavClick}>Location</Link>
+
             <Button className="w-full mt-4 gradient-bg text-white">
               Book Appointment
             </Button>

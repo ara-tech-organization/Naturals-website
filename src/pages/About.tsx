@@ -27,19 +27,19 @@ const About = () => {
 
   const team = [
     {
-      name: "Kavitha Ramesh",
+      name: "XXX",
       role: "Senior Hair Stylist",
       experience: "12+ Years",
       specialty: "Bridal Hair & Advanced Styling"
     },
     {
-      name: "Suresh Kumar",
+      name: "YYY",
       role: "Men's Grooming Specialist",
       experience: "8+ Years",
       specialty: "Modern Cuts & Beard Styling"
     },
     {
-      name: "Lakshmi Devi",
+      name: "ZZZ",
       role: "Skin Care Expert",
       experience: "10+ Years",
       specialty: "Anti-aging & Facial Treatments"
@@ -49,7 +49,7 @@ const About = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
-      <section 
+      <section
         className="relative py-32 text-white overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "linear-gradient(rgba(126, 71, 152, 0.8), rgba(126, 71, 152, 0.8)), url('https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
@@ -75,29 +75,23 @@ const About = () => {
               <h2 className="text-5xl font-bold text-gray-900 mb-8">Our Story</h2>
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
                 <p>
-                  Established in 2009, Naturals has been Thanjavur's premier destination for beauty and wellness services. 
+                  Established in 2009, Naturals has been Thanjavur's premier destination for beauty and wellness services.
                   What started as a small beauty salon has grown into a trusted brand with multiple locations across the city.
                 </p>
                 <p>
-                  Our journey began with a simple vision: to provide world-class beauty and wellness services that enhance 
-                  natural beauty and boost confidence. Over the years, we have served thousands of satisfied customers, 
+                  Our journey began with a simple vision: to provide world-class beauty and wellness services that enhance
+                  natural beauty and boost confidence. Over the years, we have served thousands of satisfied customers,
                   building lasting relationships based on trust, quality, and exceptional service.
                 </p>
                 <p>
-                  Today, we continue to evolve, incorporating the latest trends and technologies while maintaining our 
+                  Today, we continue to evolve, incorporating the latest trends and technologies while maintaining our
                   commitment to personalized care and attention to detail that has made us Thanjavur's favorite beauty destination.
                 </p>
               </div>
             </div>
             <div className="relative" data-aos="fade-left">
-              <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-3xl p-12 h-96 flex items-center justify-center shadow-2xl">
-                <svg width="250" height="250" viewBox="0 0 200 200" fill="none" className="animate-float">
-                  <circle cx="100" cy="100" r="80" stroke="#7e4798" strokeWidth="3" fill="none"/>
-                  <circle cx="100" cy="100" r="60" stroke="#7e4798" strokeWidth="2" fill="none"/>
-                  <circle cx="100" cy="100" r="40" stroke="#7e4798" strokeWidth="2" fill="none"/>
-                  <path d="M100 60 L100 140 M60 100 L140 100" stroke="#7e4798" strokeWidth="2"/>
-                  <circle cx="100" cy="100" r="8" fill="#7e4798"/>
-                </svg>
+              <div className="flex items-center justify-center">
+                <img className='rounded-2xl' src="./images/Story.jpg" alt="About_us" />
               </div>
             </div>
           </div>
@@ -120,9 +114,9 @@ const About = () => {
                 <h3 className="text-3xl font-bold text-gray-900">Our Mission</h3>
               </div>
               <p className="text-gray-600 text-center text-lg leading-relaxed">
-                To provide exceptional beauty and wellness services that enhance our customers' natural beauty, 
-                boost their confidence, and contribute to their overall well-being. We are committed to delivering 
-                personalized experiences using the finest products and latest techniques in a comfortable, 
+                To provide exceptional beauty and wellness services that enhance our customers' natural beauty,
+                boost their confidence, and contribute to their overall well-being. We are committed to delivering
+                personalized experiences using the finest products and latest techniques in a comfortable,
                 hygienic environment.
               </p>
             </Card>
@@ -135,9 +129,9 @@ const About = () => {
                 <h3 className="text-3xl font-bold text-gray-900">Our Vision</h3>
               </div>
               <p className="text-gray-600 text-center text-lg leading-relaxed">
-                To be Thanjavur's most trusted and preferred beauty and wellness destination, known for our 
-                innovative services, exceptional customer care, and commitment to enhancing natural beauty. 
-                We aspire to expand our reach while maintaining our core values of quality, integrity, and 
+                To be Thanjavur's most trusted and preferred beauty and wellness destination, known for our
+                innovative services, exceptional customer care, and commitment to enhancing natural beauty.
+                We aspire to expand our reach while maintaining our core values of quality, integrity, and
                 customer satisfaction.
               </p>
             </Card>
@@ -148,8 +142,8 @@ const About = () => {
       {/* Values Section */}
       <section className="py-20 bg-white relative">
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-primary rounded-full animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-24 h-24 bg-secondary rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+          {/* <div className="absolute top-20 left-20 w-32 h-32 bg-primary rounded-full animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-24 h-24 bg-secondary rounded-full animate-pulse" style={{animationDelay: '1s'}}></div> */}
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16" data-aos="fade-up">
@@ -158,7 +152,7 @@ const About = () => {
               The principles that guide everything we do at Naturals Thanjavur
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {values.map((value, index) => (
               <div key={index} className="text-center group" data-aos="zoom-in" data-aos-delay={index * 100}>
@@ -178,7 +172,7 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section 
+      <section
         className="py-20 text-white relative overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "linear-gradient(rgba(126, 71, 152, 0.9), rgba(126, 71, 152, 0.9)), url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
@@ -191,7 +185,7 @@ const About = () => {
               Our skilled professionals are dedicated to providing you with exceptional service and results
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {team.map((member, index) => (
               <Card key={index} className="p-8 bg-white bg-opacity-10 backdrop-blur-sm text-white border-white border-opacity-20 rounded-3xl hover:bg-opacity-20 transition-all duration-500 transform hover:scale-105" data-aos="fade-up" data-aos-delay={index * 150}>
@@ -219,8 +213,9 @@ const About = () => {
               Recognition and milestones that reflect our commitment to excellence
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* 1 - Years of Excellence */}
             <div className="text-center group" data-aos="zoom-in" data-aos-delay="0">
               <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                 <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:animate-pulse">
@@ -230,6 +225,8 @@ const About = () => {
                 <p className="text-gray-600 text-lg">Years of Excellence</p>
               </div>
             </div>
+
+            {/* 2 - Happy Customers */}
             <div className="text-center group" data-aos="zoom-in" data-aos-delay="100">
               <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                 <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:animate-pulse">
@@ -239,21 +236,25 @@ const About = () => {
                 <p className="text-gray-600 text-lg">Happy Customers</p>
               </div>
             </div>
+
+            {/* 3 - Bridal Makeovers (replacing branches) */}
             <div className="text-center group" data-aos="zoom-in" data-aos-delay="200">
               <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                 <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:animate-pulse">
                   <Sparkles className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="text-4xl font-bold text-gray-900 mb-3">5</h3>
-                <p className="text-gray-600 text-lg">Branch Locations</p>
+                <h3 className="text-4xl font-bold text-gray-900 mb-3">100+</h3>
+                <p className="text-gray-600 text-lg">Bridal Makeovers</p>
               </div>
             </div>
+
+            {/* 4 - Expert Staff */}
             <div className="text-center group" data-aos="zoom-in" data-aos-delay="300">
               <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                 <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:animate-pulse">
                   <Heart className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="text-4xl font-bold text-gray-900 mb-3">50+</h3>
+                <h3 className="text-4xl font-bold text-gray-900 mb-3">25+</h3>
                 <p className="text-gray-600 text-lg">Expert Staff</p>
               </div>
             </div>

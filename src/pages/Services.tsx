@@ -99,7 +99,7 @@ const Services = () => {
       duration: "45-60 minutes",
       icon: Sparkles,
       popular: false,
-      backgroundImage: "https://images.unsplash.com/photo-1506634572416-48cdfe530110?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      backgroundImage: "./images/wellness.jpeg"
     },
     {
       name: "Hair Treatments",
@@ -117,7 +117,7 @@ const Services = () => {
       duration: "1-2 hours",
       icon: Award,
       popular: false,
-      backgroundImage: "https://images.unsplash.com/photo-1570158268183-d296b2892211?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      backgroundImage: "./images/mens_grooming.jpeg"
     },
     {
       name: "Spa Services",
@@ -126,7 +126,7 @@ const Services = () => {
       duration: "1-1.5 hours",
       icon: Star,
       popular: true,
-      backgroundImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      backgroundImage: "./images/saloon.jpeg"
     }
   ];
 
@@ -205,9 +205,9 @@ const Services = () => {
                       </div>
                     </div>
                     
-                    <Button className="w-full bg-white bg-opacity-20 backdrop-blur-sm text-white border border-white border-opacity-30 hover:bg-white hover:text-gray-900 group-hover:scale-105 transition-all">
+                    {/* <Button className="w-full bg-white bg-opacity-20 backdrop-blur-sm text-white border border-white border-opacity-30 hover:bg-white hover:text-gray-900 group-hover:scale-105 transition-all">
                       Book Now
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
                 
@@ -272,9 +272,9 @@ const Services = () => {
                       </div>
                     </div>
                     
-                    <Button className="w-full bg-white bg-opacity-20 backdrop-blur-sm text-white border border-white border-opacity-30 hover:bg-white hover:text-gray-900 group-hover:scale-105 transition-all">
+                    {/* <Button className="w-full bg-white bg-opacity-20 backdrop-blur-sm text-white border border-white border-opacity-30 hover:bg-white hover:text-gray-900 group-hover:scale-105 transition-all">
                       Book Now
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
                 
@@ -377,7 +377,7 @@ const Services = () => {
               Book Appointment
             </Button>
             <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-3">
-              Call Now: +91 98765 43210
+              Call Now: +91 90870 00049
             </Button>
           </div>
         </div>

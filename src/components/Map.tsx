@@ -10,7 +10,7 @@ const Map = () => {
       id: 1,
       name: "Main Branch",
       address: "123 Big Street, Thanjavur - 613001",
-      phone: "+91 98765 43210",
+      phone: "+91 90870 00049",
       hours: "9:00 AM - 8:00 PM",
       position: { top: '40%', left: '45%' }
     },
@@ -34,7 +34,7 @@ const Map = () => {
       id: 4,
       name: "Medical College Road",
       address: "156 Medical College Road, Thanjavur - 613004",
-      phone: "+91 65432 10987",
+      phone: "+91 90870 00049",
       hours: "9:00 AM - 8:00 PM",
       position: { top: '35%', left: '25%' }
     },
@@ -42,7 +42,7 @@ const Map = () => {
       id: 5,
       name: "East Main Street",
       address: "234 East Main Street, Thanjavur - 613005",
-      phone: "+91 54321 09876",
+      phone: "+91 90870 00049",
       hours: "8:30 AM - 7:30 PM",
       position: { top: '50%', left: '65%' }
     }

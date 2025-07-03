@@ -214,7 +214,7 @@ const BridalPackages = () => {
               Schedule Consultation
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
-              Call +91 98765 43210
+              Call +91 90870 00049
             </Button>
           </div>
         </section>

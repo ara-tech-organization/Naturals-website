@@ -60,17 +60,21 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400">Main Branch:</p>
-                  <p className="text-sm text-gray-400">123 Big Street, Thanjavur - 613001</p>
+                  <p className="text-gray-400">Arulananda Nagar</p>
+                  <p className="text-sm text-gray-400">
+No 2851/14, No 2, 1st Floor, Philomena Shop
+Arulananda Nagar
+Thanjavur - 613007</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary" />
-                <span className="text-gray-400">+91 98765 43210</span>
+                <span className="text-gray-400">+91 90870 00049</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary" />
-                <span className="text-gray-400">info@naturals-thanjavur.com</span>
+                <span className="text-gray-400">
+naturals.tj@gmail.com</span>
               </div>
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-primary mt-1" />
