@@ -1,4 +1,3 @@
-
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Clock, Star, Users, Award, Scissors, Sparkles, Heart, Zap } from 'lucide-react';
@@ -24,7 +23,8 @@ const Services = () => {
       price: "₹500 - ₹3000",
       duration: "1-3 hours",
       icon: Scissors,
-      popular: true
+      popular: true,
+      backgroundImage: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Bridal Packages",
@@ -32,7 +32,8 @@ const Services = () => {
       price: "₹8000 - ₹25000",
       duration: "4-6 hours",
       icon: Heart,
-      popular: true
+      popular: true,
+      backgroundImage: "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Facial & Skin Care",
@@ -40,7 +41,8 @@ const Services = () => {
       price: "₹800 - ₹2500",
       duration: "45-90 minutes",
       icon: Sparkles,
-      popular: false
+      popular: false,
+      backgroundImage: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Spa & Wellness",
@@ -48,7 +50,8 @@ const Services = () => {
       price: "₹1200 - ₹4000",
       duration: "1-2 hours",
       icon: Zap,
-      popular: false
+      popular: false,
+      backgroundImage: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Nail Art & Manicure",
@@ -56,7 +59,8 @@ const Services = () => {
       price: "₹300 - ₹1500",
       duration: "30-60 minutes",
       icon: Star,
-      popular: false
+      popular: false,
+      backgroundImage: "https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Makeup & Beauty",
@@ -64,7 +68,8 @@ const Services = () => {
       price: "₹1000 - ₹5000",
       duration: "1-2 hours",
       icon: Award,
-      popular: true
+      popular: true,
+      backgroundImage: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     }
   ];
 
@@ -75,7 +80,8 @@ const Services = () => {
       price: "₹200 - ₹800",
       duration: "30-45 minutes",
       icon: Scissors,
-      popular: true
+      popular: true,
+      backgroundImage: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Beard & Mustache",
@@ -83,7 +89,8 @@ const Services = () => {
       price: "₹150 - ₹500",
       duration: "20-30 minutes",
       icon: Users,
-      popular: true
+      popular: true,
+      backgroundImage: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Facial Treatments",
@@ -91,7 +98,8 @@ const Services = () => {
       price: "₹400 - ₹1200",
       duration: "45-60 minutes",
       icon: Sparkles,
-      popular: false
+      popular: false,
+      backgroundImage: "https://images.unsplash.com/photo-1506634572416-48cdfe530110?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Hair Treatments",
@@ -99,7 +107,8 @@ const Services = () => {
       price: "₹600 - ₹2000",
       duration: "60-90 minutes",
       icon: Zap,
-      popular: false
+      popular: false,
+      backgroundImage: "https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Body Grooming",
@@ -107,7 +116,8 @@ const Services = () => {
       price: "₹800 - ₹2500",
       duration: "1-2 hours",
       icon: Award,
-      popular: false
+      popular: false,
+      backgroundImage: "https://images.unsplash.com/photo-1570158268183-d296b2892211?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       name: "Spa Services",
@@ -115,7 +125,8 @@ const Services = () => {
       price: "₹1000 - ₹3000",
       duration: "1-1.5 hours",
       icon: Star,
-      popular: true
+      popular: true,
+      backgroundImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     }
   ];
 
@@ -155,41 +166,53 @@ const Services = () => {
             {womenServices.map((service, index) => (
               <Card 
                 key={index} 
-                className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 cursor-pointer"
+                className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer h-80"
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
+                style={{
+                  backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(${service.backgroundImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
               >
-                <div className="p-8">
+                <div className="relative z-10 p-8 h-full flex flex-col justify-between text-white">
                   {service.popular && (
                     <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                       Popular
                     </div>
                   )}
                   
-                  <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <service.icon className="h-8 w-8 text-white" />
+                  <div>
+                    <div className="w-16 h-16 bg-white bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <service.icon className="h-8 w-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold mb-3 group-hover:text-purple-200 transition-colors">
+                      {service.name}
+                    </h3>
+                    <p className="text-gray-200 mb-4 text-sm leading-relaxed">{service.description}</p>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
-                    {service.name}
-                  </h3>
-                  <p className="text-gray-600 mb-6">{service.description}</p>
-                  
-                  <div className="space-y-2 mb-6">
-                    <div className="flex items-center space-x-2">
-                      <Star className="h-4 w-4 text-yellow-400" />
-                      <span className="text-sm font-semibold text-gray-700">{service.price}</span>
+                  <div>
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-400" />
+                        <span className="text-sm font-semibold">{service.price}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Clock className="h-4 w-4 text-purple-300" />
+                        <span className="text-sm text-gray-200">{service.duration}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4 text-primary" />
-                      <span className="text-sm text-gray-600">{service.duration}</span>
-                    </div>
+                    
+                    <Button className="w-full bg-white bg-opacity-20 backdrop-blur-sm text-white border border-white border-opacity-30 hover:bg-white hover:text-gray-900 group-hover:scale-105 transition-all">
+                      Book Now
+                    </Button>
                   </div>
-                  
-                  <Button className="w-full gradient-bg text-white hover:opacity-90 group-hover:scale-105 transition-transform">
-                    Book Now
-                  </Button>
                 </div>
+                
+                {/* Hover overlay for brightness effect */}
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
               </Card>
             ))}
           </div>
@@ -210,41 +233,53 @@ const Services = () => {
             {menServices.map((service, index) => (
               <Card 
                 key={index} 
-                className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 cursor-pointer"
+                className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer h-80"
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
+                style={{
+                  backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(${service.backgroundImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
               >
-                <div className="p-8">
+                <div className="relative z-10 p-8 h-full flex flex-col justify-between text-white">
                   {service.popular && (
                     <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                       Popular
                     </div>
                   )}
                   
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <service.icon className="h-8 w-8 text-white" />
+                  <div>
+                    <div className="w-16 h-16 bg-white bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <service.icon className="h-8 w-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-200 transition-colors">
+                      {service.name}
+                    </h3>
+                    <p className="text-gray-200 mb-4 text-sm leading-relaxed">{service.description}</p>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                    {service.name}
-                  </h3>
-                  <p className="text-gray-600 mb-6">{service.description}</p>
-                  
-                  <div className="space-y-2 mb-6">
-                    <div className="flex items-center space-x-2">
-                      <Star className="h-4 w-4 text-yellow-400" />
-                      <span className="text-sm font-semibold text-gray-700">{service.price}</span>
+                  <div>
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center space-x-2">
+                        <Star className="h-4 w-4 text-yellow-400" />
+                        <span className="text-sm font-semibold">{service.price}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Clock className="h-4 w-4 text-blue-300" />
+                        <span className="text-sm text-gray-200">{service.duration}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4 text-blue-500" />
-                      <span className="text-sm text-gray-600">{service.duration}</span>
-                    </div>
+                    
+                    <Button className="w-full bg-white bg-opacity-20 backdrop-blur-sm text-white border border-white border-opacity-30 hover:bg-white hover:text-gray-900 group-hover:scale-105 transition-all">
+                      Book Now
+                    </Button>
                   </div>
-                  
-                  <Button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:opacity-90 group-hover:scale-105 transition-transform">
-                    Book Now
-                  </Button>
                 </div>
+                
+                {/* Hover overlay for brightness effect */}
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
               </Card>
             ))}
           </div>
