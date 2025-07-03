@@ -93,12 +93,34 @@ const Membership = () => {
     }
   ];
 
-  const toggleFlip = (planId) => {
+  const toggleFlip = (planId: string) => {
     setIsFlipped(prev => ({
       ...prev,
       [planId]: !prev[planId]
     }));
   };
+
+  const flipCardStyles = {
+    perspective: '1000px'
+  };
+
+  const flipCardFrontStyles = (isFlipped: boolean) => ({
+    position: 'absolute' as const,
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden' as const,
+    transition: 'transform 0.6s',
+    transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+  });
+
+  const flipCardBackStyles = (isFlipped: boolean) => ({
+    position: 'absolute' as const,
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden' as const,
+    transition: 'transform 0.6s',
+    transform: isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)'
+  });
 
   return (
     <div className="min-h-screen">
@@ -134,11 +156,12 @@ const Membership = () => {
           {membershipPlans.map((plan, index) => (
             <div key={plan.id} className="relative" data-aos="fade-up" data-aos-delay={index * 100}>
               <div 
-                className={`flip-card h-96 cursor-pointer ${isFlipped[plan.id] ? 'flipped' : ''}`}
+                className={`h-96 cursor-pointer ${plan.popular ? 'ring-4 ring-purple-400 scale-105' : ''}`}
+                style={flipCardStyles}
                 onClick={() => toggleFlip(plan.id)}
               >
                 {/* Front Side */}
-                <div className={`flip-card-front ${plan.popular ? 'ring-4 ring-purple-400 scale-105' : ''}`}>
+                <div style={flipCardFrontStyles(isFlipped[plan.id])}>
                   <Card className="h-full relative overflow-hidden">
                     {plan.popular && (
                       <Badge className="absolute top-4 right-4 bg-purple-500 text-white z-10">
@@ -177,7 +200,7 @@ const Membership = () => {
                 </div>
 
                 {/* Back Side */}
-                <div className="flip-card-back">
+                <div style={flipCardBackStyles(isFlipped[plan.id])}>
                   <Card className="h-full">
                     <CardHeader className="text-center">
                       <CardTitle className="text-xl font-bold text-gray-800">{plan.name} Benefits</CardTitle>
@@ -288,28 +311,6 @@ const Membership = () => {
           </div>
         </section>
       </div>
-
-      <style jsx>{`
-        .flip-card {
-          perspective: 1000px;
-        }
-        .flip-card-front, .flip-card-back {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          backface-visibility: hidden;
-          transition: transform 0.6s;
-        }
-        .flip-card-back {
-          transform: rotateY(180deg);
-        }
-        .flip-card.flipped .flip-card-front {
-          transform: rotateY(180deg);
-        }
-        .flip-card.flipped .flip-card-back {
-          transform: rotateY(0deg);
-        }
-      `}</style>
     </div>
   );
 };
