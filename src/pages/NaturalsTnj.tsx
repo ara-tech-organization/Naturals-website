@@ -39,9 +39,28 @@ const NaturalsTnj = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/thankyou');
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('https://naturalsthanjavur.com/api/submit-lead.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, source: 'Naturals TNJ Landing Page' }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        navigate('/thankyou');
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch {
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const services = [
@@ -187,8 +206,8 @@ const NaturalsTnj = () => {
             {/* Right Side - Contact Form */}
             <div data-aos="fade-left">
               <Card className="p-8 border-0 shadow-2xl bg-white/95 backdrop-blur-sm">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Send Us a Message</h3>
-                <p className="text-gray-600 mb-6">Fill out the form and we'll get back to you.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-1 text-center">Book an Appointment</h3>
+                <p className="text-gray-600 mb-6 text-center">Naturals Thanjavur</p>
                 <form className="space-y-4" onSubmit={handleSubmit}>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
@@ -230,14 +249,14 @@ const NaturalsTnj = () => {
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
                     >
                       <option value="">Select a service</option>
-                      <option value="hair">Hair Care & Styling</option>
-                      <option value="bridal">Bridal Package</option>
-                      <option value="facial">Facial & Skin Care</option>
-                      <option value="men">Men's Grooming</option>
+                      <option value="Hair Care & Styling">Hair Care & Styling</option>
+                      <option value="Bridal Package">Bridal Package</option>
+                      <option value="Facial & Skin Care">Facial & Skin Care</option>
+                      <option value="Men's Grooming">Men's Grooming</option>
                     </select>
                   </div>
-                  <Button className="w-full gradient-bg text-white hover:opacity-90 py-3">
-                    Book Appointment
+                  <Button className="w-full gradient-bg text-white hover:opacity-90 py-3" disabled={isSubmitting}>
+                    {isSubmitting ? 'Submitting...' : 'Book Appointment'}
                   </Button>
                 </form>
               </Card>
