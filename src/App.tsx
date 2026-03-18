@@ -17,6 +17,8 @@ import NotFound from "./pages/NotFound";
 import BridalPackages from "./pages/BridalPackages";
 import Pricing from "./pages/Pricing";
 import Membership from "./pages/Membership";
+import NaturalsTnj from "./pages/NaturalsTnj";
+import ThankYou from "./pages/ThankYou";
 
 const queryClient = new QueryClient();
 
@@ -40,23 +42,32 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <main className="flex-1">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/contact" element={<Contact />} />
-                {/* <Route path="/location" element={<Location />} /> */}
-                <Route path="/bridal-packages" element={<BridalPackages />} />
-                {/* <Route path="/pricing" element={<Pricing />} /> */}
-                <Route path="/membership" element={<Membership />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
+          <Routes>
+            {/* NaturalsTnj and ThankYou have their own header/footer */}
+            <Route path="/naturalstnj" element={<NaturalsTnj />} />
+            <Route path="/thankyou" element={<ThankYou />} />
+
+            {/* All other pages use common Header/Footer */}
+            <Route path="*" element={
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <main className="flex-1">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/contact" element={<Contact />} />
+                    {/* <Route path="/location" element={<Location />} /> */}
+                    <Route path="/bridal-packages" element={<BridalPackages />} />
+                    {/* <Route path="/pricing" element={<Pricing />} /> */}
+                    <Route path="/membership" element={<Membership />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
+            } />
+          </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
