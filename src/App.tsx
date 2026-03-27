@@ -18,6 +18,7 @@ import BridalPackages from "./pages/BridalPackages";
 import Pricing from "./pages/Pricing";
 import Membership from "./pages/Membership";
 import NaturalsTnj from "./pages/NaturalsTnj";
+import TnjNaturals from "./pages/TnjNaturals";
 import ThankYou from "./pages/ThankYou";
 
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ const App = () => {
           <Routes>
             {/* NaturalsTnj and ThankYou have their own header/footer */}
             <Route path="/naturalstnj" element={<NaturalsTnj />} />
+            <Route path="/tnjnaturals" element={<TnjNaturals />} />
             <Route path="/thankyou" element={<ThankYou />} />
 
             {/* All other pages use common Header/Footer */}

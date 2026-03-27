@@ -138,7 +138,7 @@ const NaturalsTnj = () => {
               </div>
               <div className="flex items-center space-x-1">
                 <Mail className="h-4 w-4" />
-                <span>naturals.tj@gmail.com</span>
+                <span>naturals.tj2@gmail.com</span>
               </div>
             </div>
             <div className="hidden md:block">
@@ -191,7 +191,7 @@ const NaturalsTnj = () => {
         <div id="contact-form" className="relative z-10 container mx-auto px-4 h-full flex items-center py-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
             {/* Left Side - Content */}
-            <div className="text-white" data-aos="fade-right">
+            <div className="text-white text-center lg:text-left" data-aos="fade-right">
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
                 Premium Beauty Services
               </h1>
@@ -566,7 +566,7 @@ const NaturalsTnj = () => {
                 </a>
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary" />
-                  <span className="text-gray-400">naturals.tj@gmail.com</span>
+                  <span className="text-gray-400">naturals.tj2@gmail.com</span>
                 </div>
                 <div className="flex items-start space-x-3">
                   <Clock className="h-5 w-5 text-primary mt-1" />

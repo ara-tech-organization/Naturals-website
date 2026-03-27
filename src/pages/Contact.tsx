@@ -34,6 +34,31 @@ const Contact = () => {
     });
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('https://naturalsthanjavur.com/api/mail.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, source: 'Website Contact Page' }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        alert('Message sent successfully!');
+        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch {
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactInfo = [
     {
       icon: Phone,
@@ -44,7 +69,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      info: "naturals.tj@gmail.com",
+      info: "naturals.tj2@gmail.com",
       desc: "We'll respond within 24 hours"
     },
     {
@@ -146,7 +171,7 @@ const Contact = () => {
               </p>
               
               <Card className="p-8 border-0 shadow-lg">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
@@ -191,11 +216,11 @@ const Contact = () => {
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
                       >
                         <option value="">Select a service</option>
-                        <option value="hair">Hair Care & Styling</option>
-                        <option value="bridal">Bridal Package</option>
-                        <option value="facial">Facial & Skin Care</option>
-                        <option value="spa">Spa & Wellness</option>
-                        <option value="men">Men's Grooming</option>
+                        <option value="Hair Care & Styling">Hair Care & Styling</option>
+                        <option value="Bridal Package">Bridal Package</option>
+                        <option value="Facial & Skin Care">Facial & Skin Care</option>
+                        {/* <option value="Spa & Wellness">Spa & Wellness</option> */}
+                        <option value="Men's Grooming">Men's Grooming</option>
                       </select>
                     </div>
                   </div>
@@ -212,8 +237,8 @@ const Contact = () => {
                     />
                   </div>
                   
-                  <Button className="w-full gradient-bg text-white hover:opacity-90 py-3">
-                    Send Message
+                  <Button className="w-full gradient-bg text-white hover:opacity-90 py-3" disabled={isSubmitting}>
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </Card>

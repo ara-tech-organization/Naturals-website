@@ -74,7 +74,7 @@ Thanjavur - 613007</p>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary" />
                 <span className="text-gray-400">
-naturals.tj@gmail.com</span>
+naturals.tj2@gmail.com</span>
               </div>
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-primary mt-1" />
