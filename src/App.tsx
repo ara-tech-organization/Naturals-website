@@ -46,7 +46,7 @@ const App = () => {
           <Routes>
             {/* NaturalsTnj and ThankYou have their own header/footer */}
             <Route path="/naturalstnj" element={<NaturalsTnj />} />
-            <Route path="/tnjnaturals" element={<TnjNaturals />} />
+            <Route path="/naturalsappoinment" element={<TnjNaturals />} />
             <Route path="/thankyou" element={<ThankYou />} />
 
             {/* All other pages use common Header/Footer */}

@@ -52,7 +52,7 @@ const NaturalsTnj = () => {
       });
       const data = await response.json();
       if (data.success) {
-        navigate('/thankyou');
+        navigate('/thankyou?from=naturalstnj');
       } else {
         alert('Something went wrong. Please try again.');
       }

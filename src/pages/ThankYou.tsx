@@ -1,10 +1,15 @@
 
 import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Phone, Mail, ArrowLeft } from 'lucide-react';
 import AOS from 'aos';
 
 const ThankYou = () => {
+  const [searchParams] = useSearchParams();
+  const from = searchParams.get('from');
+  const backUrl = from === 'tnjnaturals' ? '/naturalsappoinment' : '/naturalstnj';
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -48,11 +53,11 @@ const ThankYou = () => {
 
         <nav className="container mx-auto px-4 py-4 bg-primary relative">
           <div className="flex justify-between items-center">
-            <a href="/naturalstnj">
+            <a href={backUrl}>
               <img src="./images/logo.png" alt="Logo" width="150px" />
             </a>
             <div className="hidden lg:flex items-center space-x-8 text-white">
-              <a href="/naturalstnj" className="font-medium hover:text-white">
+              <a href={backUrl} className="font-medium hover:text-white">
                 Home
               </a>
             </div>
@@ -78,7 +83,7 @@ const ThankYou = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <a href="/naturalstnj">
+              <a href={backUrl}>
                 <Button size="lg" className="gradient-bg text-white hover:opacity-90 font-semibold px-8 py-4 text-lg">
                   <ArrowLeft className="h-5 w-5 mr-2" />
                   Back to Home

@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Star, MapPin, Phone, Mail, Menu, X, ChevronRight, Clock, Facebook, Instagram, Twitter, Sparkles, Heart, Shield, Award, CheckCircle } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Star, MapPin, Phone, Mail, Menu, X, ChevronRight, Clock, Facebook, Instagram, Twitter, Sparkles, Heart, Shield, Award, CheckCircle, CalendarDays } from 'lucide-react';
 import AOS from 'aos';
 
 const TnjNaturals = () => {
@@ -23,10 +24,12 @@ const TnjNaturals = () => {
     name: '',
     email: '',
     phone: '',
-    service: '',
+    city: '',
+    message: '',
+    appointmentDate: '',
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -42,11 +45,19 @@ const TnjNaturals = () => {
       const response = await fetch('https://naturalsthanjavur.com/api/submit-lead.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source: 'TNJ Naturals Landing Page' }),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          city: formData.city,
+          message: formData.message,
+          appointment_date: formData.appointmentDate,
+          source: 'TNJ Naturals Landing Page',
+        }),
       });
       const data = await response.json();
       if (data.success) {
-        navigate('/thankyou');
+        navigate('/thankyou?from=tnjnaturals');
       } else {
         alert('Something went wrong. Please try again.');
       }
@@ -124,7 +135,7 @@ const TnjNaturals = () => {
       <header className="bg-primary shadow-lg sticky top-0 z-50">
         <nav className="container mx-auto px-4 py-3 relative">
           <div className="flex justify-between items-center">
-            <a href="/tnjnaturals" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setIsMenuOpen(false); }}>
+            <a href="/naturalsappoinment" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setIsMenuOpen(false); }}>
               <img src="./images/logo.png" alt="Naturals Logo" width="130px" />
             </a>
 
@@ -187,8 +198,8 @@ const TnjNaturals = () => {
             <div data-aos="fade-left" data-aos-delay="150">
               <Card className="p-6 md:p-8 border-0 shadow-2xl bg-white rounded-2xl">
                 <div className="text-center mb-5">
-                  <h3 className="text-xl font-bold text-gray-900">Book a Free Consultation</h3>
-                  <p className="text-gray-500 text-sm mt-1">Get expert beauty advice — no obligation</p>
+                  <h3 className="text-xl font-bold text-gray-900">Book a Consultation</h3>
+                  <p className="text-gray-500 text-sm mt-1">Naturals Thanjavur</p>
                 </div>
                 <form className="space-y-3" onSubmit={handleSubmit}>
                   <div>
@@ -196,7 +207,7 @@ const TnjNaturals = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="Full Name *"
+                      placeholder="Name *"
                       required
                       className="border-gray-200 focus:border-primary h-11"
                     />
@@ -214,6 +225,7 @@ const TnjNaturals = () => {
                   <div>
                     <Input
                       name="phone"
+                      type="tel"
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="Phone Number *"
@@ -222,21 +234,42 @@ const TnjNaturals = () => {
                     />
                   </div>
                   <div>
-                    <select
-                      name="service"
-                      value={formData.service}
+                    <Input
+                      name="city"
+                      value={formData.city}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-md focus:outline-none focus:border-primary text-sm text-gray-700 h-11"
-                    >
-                      <option value="">Select a Service</option>
-                      <option value="Hair Care & Styling">Hair Care & Styling</option>
-                      <option value="Bridal Package">Bridal Package</option>
-                      <option value="Facial & Skin Care">Facial & Skin Care</option>
-                      <option value="Men's Grooming">Men's Grooming</option>
-                    </select>
+                      placeholder="City *"
+                      required
+                      className="border-gray-200 focus:border-primary h-11"
+                    />
+                  </div>
+                  <div>
+                    <label className="flex items-center gap-2 text-sm text-gray-600 mb-1">
+                      <CalendarDays className="h-4 w-4 text-primary" />
+                      Appointment Date *
+                    </label>
+                    <Input
+                      name="appointmentDate"
+                      type="date"
+                      value={formData.appointmentDate}
+                      onChange={handleInputChange}
+                      required
+                      min={new Date().toISOString().split('T')[0]}
+                      className="border-gray-200 focus:border-primary h-11"
+                    />
+                  </div>
+                  <div>
+                    <Textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Message"
+                      rows={3}
+                      className="border-gray-200 focus:border-primary resize-none"
+                    />
                   </div>
                   <Button className="w-full gradient-bg text-white hover:opacity-90 h-12 text-base font-semibold" disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting...' : 'Book Appointment Now'}
+                    {isSubmitting ? 'Submitting...' : 'Submit'}
                   </Button>
                   <p className="text-xs text-gray-400 text-center">We'll get back to you within 30 minutes</p>
                 </form>
@@ -292,26 +325,31 @@ const TnjNaturals = () => {
         </div>
       </section>
 
-      {/* Clinic Images Section - Placeholder */}
-      <section id="clinic-images" className="py-14 bg-white">
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-14 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Our Salon</h2>
-            <p className="text-gray-500">A glimpse into our premium salon experience</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">How It Works</h2>
+            <p className="text-gray-500">Book your appointment in 3 simple steps</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            {[1, 2, 3, 4, 5, 6].map((_, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {[
+              { step: '1', title: 'Book Online', description: 'Fill out the consultation form with your preferred date and we\'ll confirm your slot.', icon: <CalendarDays className="h-8 w-8 text-white" /> },
+              { step: '2', title: 'Visit Our Salon', description: 'Walk into our premium Thanjavur salon and get a personalized consultation with our experts.', icon: <MapPin className="h-8 w-8 text-white" /> },
+              { step: '3', title: 'Get Transformed', description: 'Enjoy world-class beauty services and leave looking and feeling your absolute best.', icon: <Sparkles className="h-8 w-8 text-white" /> },
+            ].map((item, index) => (
               <div
                 key={index}
-                className="aspect-[4/3] rounded-xl bg-gray-100 flex items-center justify-center border border-dashed border-gray-200"
+                className="text-center"
                 data-aos="fade-up"
-                data-aos-delay={index * 60}
+                data-aos-delay={index * 100}
               >
-                <div className="text-center text-gray-300">
-                  <Sparkles className="h-6 w-6 mx-auto mb-1" />
-                  <p className="text-xs">Coming Soon</p>
+                <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  {item.icon}
                 </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
