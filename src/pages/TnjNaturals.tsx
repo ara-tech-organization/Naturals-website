@@ -507,14 +507,8 @@ const TnjNaturals = () => {
         <div className="container mx-auto px-4 py-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-3">
-                <div className="w-9 h-9 gradient-bg rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">N</span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold">Naturals</h3>
-                  <p className="text-xs text-gray-400">Beauty & Wellness</p>
-                </div>
+              <div className="mb-3">
+                <img src="./images/logo.png" alt="Naturals Logo" width="150px" />
               </div>
               <p className="text-gray-400 text-sm mb-4">
                 Premium beauty and wellness services in Thanjavur. Experience luxury treatments

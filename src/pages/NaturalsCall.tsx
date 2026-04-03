@@ -1,18 +1,11 @@
 
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Star, MapPin, Phone, Mail, Menu, X, ChevronRight, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
 import AOS from 'aos';
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
 
-const NaturalsTnj = () => {
-  const navigate = useNavigate();
-
+const NaturalsCall = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -23,63 +16,6 @@ const NaturalsTnj = () => {
     });
     AOS.refresh();
   }, []);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
-
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const response = await fetch('https://naturalsthanjavur.com/api/submit-lead.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source: 'Naturals TNJ Landing Page' }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        navigate('/thankyou?from=naturalstnj');
-      } else {
-        alert('Something went wrong. Please try again.');
-      }
-    } catch {
-      alert('Something went wrong. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const services = [
-    {
-      name: "Hair Styling",
-      desc: "Professional cuts and styling",
-      image: "/images/hairstyle.jpg",
-    },
-    {
-      name: "Bridal Services",
-      desc: "Complete bridal makeover",
-      image: "/images/makeup.jpeg",
-    },
-    {
-      name: "Skin Care",
-      desc: "Advanced facial treatments",
-      image: "/images/skincare.jpeg",
-    },
-  ];
 
   const testimonials = [
     {
@@ -102,13 +38,6 @@ const NaturalsTnj = () => {
     }
   ];
 
-  const stats = [
-    { number: 10000, label: "Happy Customers", suffix: "+" },
-    { number: 15, label: "Years Experience", suffix: "+" },
-    { number: 100, label: "Bridal Works", suffix: "+" },
-    { number: 25, label: "Expert Stylists", suffix: "+" }
-  ];
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavClick = () => {
@@ -127,7 +56,7 @@ const NaturalsTnj = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Dedicated Header for NaturalsTnj */}
+      {/* Dedicated Header */}
       <header className="bg-primary shadow-lg sticky top-0 z-50">
         <div className="bg-primary text-white py-2 hidden lg:block">
           <div className="container mx-auto px-4 flex justify-between items-center text-sm">
@@ -149,7 +78,7 @@ const NaturalsTnj = () => {
 
         <nav className="container mx-auto px-4 py-4 bg-primary relative">
           <div className="flex justify-between items-center">
-            <a href="/naturalstnj" onClick={handleNavClick}>
+            <a href="/naturals-beauty-salon" onClick={handleNavClick}>
               <img src="./images/logo.png" alt="Logo" width="150px" />
             </a>
 
@@ -180,7 +109,7 @@ const NaturalsTnj = () => {
         </nav>
       </header>
 
-      {/* Hero Section - Single Image with Left Content + Right Contact Form */}
+      {/* Hero Section - Full width content, no form */}
       <section
         className="relative bg-cover bg-center bg-no-repeat"
         style={{
@@ -188,154 +117,22 @@ const NaturalsTnj = () => {
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div id="contact-form" className="relative z-10 container mx-auto px-4 h-full flex items-center py-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-            {/* Left Side - Content */}
-            <div className="text-white text-center lg:text-left" data-aos="fade-right">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                Premium Beauty Services
-              </h1>
-              <p className="text-2xl md:text-3xl mb-8 text-purple-100">
-                Transform Your Look with Expert Care
-              </p>
-              {/* <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
-                Book Appointment
-              </Button> */}
-            </div>
-
-            {/* Right Side - Contact Form */}
-            <div data-aos="fade-left">
-              <Card className="p-8 border-0 shadow-2xl bg-white/95 backdrop-blur-sm">
-                <h3 className="text-2xl font-bold text-gray-900 mb-1 text-center">Book an Appointment</h3>
-                <p className="text-gray-600 mb-6 text-center">Naturals Thanjavur</p>
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                    <Input
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Enter your full name"
-                      className="border-gray-300 focus:border-primary"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                    <Input
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Enter your email"
-                      className="border-gray-300 focus:border-primary"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                    <Input
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="Enter your phone number"
-                      className="border-gray-300 focus:border-primary"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Service Interest</label>
-                    <select
-                      name="service"
-                      value={formData.service}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
-                    >
-                      <option value="">Select a service</option>
-                      <option value="Hair Care & Styling">Hair Care & Styling</option>
-                      <option value="Bridal Package">Bridal Package</option>
-                      <option value="Facial & Skin Care">Facial & Skin Care</option>
-                      <option value="Men's Grooming">Men's Grooming</option>
-                    </select>
-                  </div>
-                  <Button className="w-full gradient-bg text-white hover:opacity-90 py-3" disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting...' : 'Book Appointment'}
-                  </Button>
-                </form>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Welcome Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">Welcome to Naturals Thanjavur</h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Experience the finest in beauty and wellness at Thanjavur's premier salon chain.
-              With over 15 years of expertise, we're your trusted partner
-              in looking and feeling your absolute best.
+        <div className="relative z-10 container mx-auto px-4 py-20 lg:py-32 flex items-center justify-center min-h-[60vh]">
+          <div className="text-white text-center" data-aos="fade-up">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              Premium Beauty Services
+            </h1>
+            <p className="text-2xl md:text-3xl mb-8 text-purple-100">
+              Transform Your Look with Expert Care
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="relative rounded-xl overflow-hidden shadow-lg transition-all duration-500 cursor-pointer h-[320px] group bg-cover bg-center"
-                style={{ backgroundImage: `url(${service.image})` }}
-                data-aos="zoom-in"
-                data-aos-delay={index * 100}
-              >
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/60 transition-all duration-500" />
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 transition-all duration-500 opacity-0 group-hover:opacity-100">
-                  <h3 className="text-2xl font-bold text-white mb-3">{service.name}</h3>
-                  <p className="text-white text-sm">{service.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 gradient-bg text-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-4xl font-bold mb-6">Our Success in Numbers</h2>
-            <p className="text-xl text-purple-100 max-w-2xl mx-auto">
-              Trusted by thousands of customers across Thanjavur
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const { ref, inView } = useInView({
-                triggerOnce: true,
-                threshold: 0.5,
-              });
-
-              return (
-                <div
-                  key={index}
-                  ref={ref}
-                  className="text-center group"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 200}
-                >
-                  <div className="text-4xl md:text-6xl font-bold mb-4 group-hover:scale-110 transition-transform">
-                    {inView && (
-                      <CountUp
-                        start={0}
-                        end={stat.number}
-                        duration={2}
-                        suffix={stat.suffix || ''}
-                      />
-                    )}
-                  </div>
-                  <div className="text-xl text-purple-100">{stat.label}</div>
-                </div>
-              );
-            })}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="tel:+919087000049">
+                <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-4 text-lg animate-pulse-scale">
+                  <Phone className="h-5 w-5 mr-2" />
+                  Click to Call: +91 90870 00049
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -472,7 +269,7 @@ const NaturalsTnj = () => {
             <iframe
               className="w-full h-[400px] rounded-xl shadow-lg"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4931029823315!2d79.13116237596353!3d10.773494531878411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab9b069029cff%3A0x58f9279539ef68c4!2sNaturals%20unisex%20salon%20-%20Arulanthar%20nagar!5e0!3m2!1sen!2sin!4v1751542614741!5m2!1sen!2sin"
-              allowFullScreen=""
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
@@ -489,11 +286,8 @@ const NaturalsTnj = () => {
             Book your appointment today and discover why we're the city's favorite salon.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-4 text-lg" onClick={(e) => { e.preventDefault(); document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>
-              Book Appointment Now
-            </Button>
             <a href="tel:+919087000049">
-              <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-4 text-lg">
+              <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-4 text-lg">
                 <Phone className="h-5 w-5 mr-2" />
                 Call: +91 90870 00049
               </Button>
@@ -526,9 +320,9 @@ const NaturalsTnj = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
-                <li><a href="/naturalstnj" className="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                <li><a href="/naturals-beauty-salon" className="text-gray-400 hover:text-primary transition-colors">Home</a></li>
                 <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="text-gray-400 hover:text-primary transition-colors">Services</a></li>
-                <li><a href="#contact-form" onClick={(e) => scrollToSection(e, 'contact-form')} className="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                <li><a href="#location" onClick={(e) => scrollToSection(e, 'location')} className="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
               </ul>
             </div>
 
@@ -587,4 +381,4 @@ const NaturalsTnj = () => {
   );
 };
 
-export default NaturalsTnj;
+export default NaturalsCall;
