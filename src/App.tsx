@@ -17,10 +17,8 @@ import NotFound from "./pages/NotFound";
 import BridalPackages from "./pages/BridalPackages";
 import Pricing from "./pages/Pricing";
 import Membership from "./pages/Membership";
-import NaturalsTnj from "./pages/NaturalsTnj";
 import TnjNaturals from "./pages/TnjNaturals";
 import ThankYou from "./pages/ThankYou";
-import NaturalsCall from "./pages/NaturalsCall";
 
 const queryClient = new QueryClient();
 
@@ -45,10 +43,8 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            {/* NaturalsTnj and ThankYou have their own header/footer */}
-            <Route path="/naturalstnj" element={<NaturalsTnj />} />
+            {/* TnjNaturals and ThankYou have their own header/footer */}
             <Route path="/naturalsappoinment" element={<TnjNaturals />} />
-            <Route path="/naturals-beauty-salon" element={<NaturalsCall />} />
             <Route path="/thankyou" element={<ThankYou />} />
 
             {/* All other pages use common Header/Footer */}

@@ -5,6 +5,10 @@ RewriteBase /
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# Retired pages: block entirely, no page served
+RewriteRule ^naturalstnj/?$ - [G,L]
+RewriteRule ^naturals-beauty-salon/?$ - [G,L]
+
 # If an existing asset or directory is requested, serve it
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

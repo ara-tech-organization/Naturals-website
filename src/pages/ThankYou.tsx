@@ -10,8 +10,7 @@ const ThankYou = () => {
   const from = searchParams.get('from');
   const backUrl =
     from === 'tnjnaturals' ? '/naturalsappoinment' :
-    from === 'contact' ? '/' :
-    '/naturalstnj';
+    '/';
 
   useEffect(() => {
     AOS.init({
