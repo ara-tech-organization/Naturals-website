@@ -1,5 +1,6 @@
 
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Scissors, Heart, Sparkles, Users, Star, Award, Clock, MapPin, Phone, ChevronRight } from 'lucide-react';
@@ -91,9 +92,10 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <div
+              <Link
                 key={index}
-                className="relative rounded-xl overflow-hidden shadow-lg transition-all duration-500 cursor-pointer h-[320px] group bg-cover bg-center"
+                to="/services"
+                className="relative rounded-xl overflow-hidden shadow-lg transition-all duration-500 cursor-pointer h-[320px] group bg-cover bg-center block"
                 style={{ backgroundImage: `url(${service.image})` }}
                 data-aos="zoom-in"
                 data-aos-delay={index * 100}
@@ -106,7 +108,7 @@ const Home = () => {
                   <h3 className="text-2xl font-bold text-white mb-3">{service.name}</h3>
                   <p className="text-white text-sm">{service.desc}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -211,9 +213,11 @@ const Home = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full gradient-bg text-white hover:opacity-90">
-                    View Services
-                  </Button>
+                  <Link to="/services">
+                    <Button className="w-full gradient-bg text-white hover:opacity-90">
+                      View Services
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             ))}
@@ -276,35 +280,44 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Branch Info Card */}
-          <div
-            className="max-w-2xl mx-auto p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group mb-12"
-            data-aos="zoom-in"
-          >
-            <div className="flex items-center space-x-4 mb-4">
-              <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                <MapPin className="h-6 w-6 text-white" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            {/* Branch Info Card */}
+            <div
+              className="h-full flex flex-col justify-center bg-white rounded-2xl p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+              data-aos="fade-right"
+            >
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <MapPin className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Naturals</h3>
+                  <p className="text-gray-600">Arulanthar Nagar</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">Naturals</h3>
-                <p className="text-gray-600">Arulanthar Nagar</p>
-              </div>
+              <p className="text-gray-600 mb-6">1st Floor, Philomena Shop, 2851/14, No 2, opposite Vinodhagan Hospital, Arulanthar Nagar, Thanjavur, Tamil Nadu 613007</p>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=Naturals+unisex+salon+Arulanthar+nagar+Thanjavur"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="self-start"
+              >
+                <Button size="sm" className="gradient-bg text-white hover:opacity-90">
+                  Get Directions
+                </Button>
+              </a>
             </div>
-            <p className="text-gray-600 mb-4">1st Floor, Philomena Shop, 2851/14, No 2, opposite Vinodhagan Hospital, Arulanthar Nagar, Thanjavur, Tamil Nadu 613007</p>
-            {/* <Button size="sm" className="gradient-bg text-white hover:opacity-90">
-              Get Directions
-            </Button> */}
-          </div>
 
-          {/* Full Width Map */}
-          <div className="w-full">
-            <iframe
-              className="w-full h-[400px] rounded-xl shadow-lg"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4931029823315!2d79.13116237596353!3d10.773494531878411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab9b069029cff%3A0x58f9279539ef68c4!2sNaturals%20unisex%20salon%20-%20Arulanthar%20nagar!5e0!3m2!1sen!2sin!4v1751542614741!5m2!1sen!2sin"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            {/* Map */}
+            <div className="h-full min-h-[320px]" data-aos="fade-left">
+              <iframe
+                className="w-full h-full min-h-[320px] rounded-xl shadow-lg"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4931029823315!2d79.13116237596353!3d10.773494531878411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab9b069029cff%3A0x58f9279539ef68c4!2sNaturals%20unisex%20salon%20-%20Arulanthar%20nagar!5e0!3m2!1sen!2sin!4v1751542614741!5m2!1sen!2sin"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
@@ -318,13 +331,17 @@ const Home = () => {
             Book your appointment today and discover why we're the city's favorite salon.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-4 text-lg">
-              Book Appointment Now
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-4 text-lg">
-              <Phone className="h-5 w-5 mr-2" />
-              Call: +91 90870 00049
-            </Button>
+            <Link to="/contact">
+              <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-4 text-lg">
+                Book Appointment Now
+              </Button>
+            </Link>
+            <a href="tel:+919087000049">
+              <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-4 text-lg">
+                <Phone className="h-5 w-5 mr-2" />
+                Call: +91 90870 00049
+              </Button>
+            </a>
           </div>
         </div>
       </section>

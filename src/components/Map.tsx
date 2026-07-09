@@ -110,9 +110,15 @@ const Map = () => {
                 <span>{branch.hours}</span>
               </div>
             </div>
-            <Button size="sm" className="w-full mt-3 gradient-bg text-white hover:opacity-90">
-              Get Directions
-            </Button>
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branch.address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="sm" className="w-full mt-3 gradient-bg text-white hover:opacity-90">
+                Get Directions
+              </Button>
+            </a>
           </Card>
         </div>
       ))}

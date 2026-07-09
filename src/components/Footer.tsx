@@ -61,15 +61,14 @@ Arulananda Nagar
 Thanjavur - 613007</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-3">
+              <a href="tel:+919087000049" className="flex items-center space-x-3 hover:text-primary">
                 <Phone className="h-5 w-5 text-primary" />
                 <span className="text-gray-400">+91 90870 00049</span>
-              </div>
-              <div className="flex items-center space-x-3">
+              </a>
+              <a href="mailto:naturals.tj2@gmail.com" className="flex items-center space-x-3 hover:text-primary">
                 <Mail className="h-5 w-5 text-primary" />
-                <span className="text-gray-400">
-naturals.tj2@gmail.com</span>
-              </div>
+                <span className="text-gray-400">naturals.tj2@gmail.com</span>
+              </a>
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-primary mt-1" />
                 <div className="text-gray-400">
@@ -85,8 +84,9 @@ naturals.tj2@gmail.com</span>
           <p className="text-gray-400">
             © 2024 Naturals Beauty Salon, Thanjavur. All rights reserved.
           </p>
-          <Link to="https://discovertechnologies.co/">
-          <p className="text-gray-400">Website created by ARA Discover Technologies - A unit of ARA Discoveries Pvt. Ltd.</p></Link>
+          <a href="https://discovertechnologies.co/" target="_blank" rel="noopener noreferrer">
+            <p className="text-gray-400">Website created by ARA Discover Technologies - A unit of ARA Discoveries Pvt. Ltd.</p>
+          </a>
         </div>
       </div>
     </footer>

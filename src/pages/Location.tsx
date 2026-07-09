@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, Phone, Clock, Car, Navigation, Star } from 'lucide-react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import Map from '@/components/Map';
 
@@ -140,7 +141,11 @@ const Location = () => {
             <p className="text-lg text-purple-200 mb-8">
               Visit any of our premium branches for exceptional beauty and wellness services
             </p>
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
+            <Button
+              size="lg"
+              className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3"
+              onClick={() => document.getElementById('branch-list')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            >
               Find Nearest Branch
             </Button>
           </div>
@@ -148,7 +153,7 @@ const Location = () => {
       </section>
 
       {/* Branch Locations Section */}
-      <section className="py-16 bg-white">
+      <section id="branch-list" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12" data-aos="fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Branch Network</h2>
@@ -216,12 +221,21 @@ const Location = () => {
                 </div>
                 
                 <div className="flex space-x-3">
-                  <Button size="sm" className="gradient-bg text-white hover:opacity-90 flex-1">
-                    Get Directions
-                  </Button>
-                  <Button size="sm" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white flex-1">
-                    Call Branch
-                  </Button>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(branch.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1"
+                  >
+                    <Button size="sm" className="gradient-bg text-white hover:opacity-90 w-full">
+                      Get Directions
+                    </Button>
+                  </a>
+                  <a href={`tel:+91${branch.phone.replace(/\D/g, '').slice(-10)}`} className="flex-1">
+                    <Button size="sm" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white w-full">
+                      Call Branch
+                    </Button>
+                  </a>
                 </div>
               </Card>
             ))}
@@ -346,12 +360,20 @@ const Location = () => {
           </div>
           
           <div className="text-center mt-12" data-aos="fade-up">
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3 mr-4">
-              Book Appointment Now
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-3">
-              Get Directions
-            </Button>
+            <Link to="/contact">
+              <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3 mr-4">
+                Book Appointment Now
+              </Button>
+            </Link>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Naturals+Thanjavur"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-3">
+                Get Directions
+              </Button>
+            </a>
           </div>
         </div>
       </section>

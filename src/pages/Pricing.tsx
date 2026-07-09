@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -168,9 +169,11 @@ const Pricing = () => {
                           <TableCell className="text-gray-600">{service.duration}</TableCell>
                           <TableCell className="font-semibold text-purple-600 text-lg">{service.price}</TableCell>
                           <TableCell>
-                            <Button size="sm" variant="outline" className="hover:bg-purple-500 hover:text-white">
-                              Book Now
-                            </Button>
+                            <Link to={`/contact?service=${encodeURIComponent(service.name)}`}>
+                              <Button size="sm" variant="outline" className="hover:bg-purple-500 hover:text-white">
+                                Book Now
+                              </Button>
+                            </Link>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -217,9 +220,11 @@ const Pricing = () => {
                           <TableCell className="text-gray-600">{service.duration}</TableCell>
                           <TableCell className="font-semibold text-blue-600 text-lg">{service.price}</TableCell>
                           <TableCell>
-                            <Button size="sm" variant="outline" className="hover:bg-blue-500 hover:text-white">
-                              Book Now
-                            </Button>
+                            <Link to={`/contact?service=${encodeURIComponent(service.name)}`}>
+                              <Button size="sm" variant="outline" className="hover:bg-blue-500 hover:text-white">
+                                Book Now
+                              </Button>
+                            </Link>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -246,7 +251,9 @@ const Pricing = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600 mb-4">Get 20% off on your first service booking</p>
-                <Button className="w-full gradient-bg text-white">Claim Offer</Button>
+                <Link to="/contact?offer=first-visit-special">
+                  <Button className="w-full gradient-bg text-white">Claim Offer</Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -257,7 +264,9 @@ const Pricing = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600 mb-4">Save ₹500 on Hair + Facial combo</p>
-                <Button className="w-full bg-green-500 text-white hover:bg-green-600">Book Combo</Button>
+                <Link to="/contact?offer=hair-facial-combo">
+                  <Button className="w-full bg-green-500 text-white hover:bg-green-600">Book Combo</Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -268,7 +277,9 @@ const Pricing = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600 mb-4">Refer friends and earn ₹200 credits</p>
-                <Button className="w-full bg-pink-500 text-white hover:bg-pink-600">Learn More</Button>
+                <Link to="/contact?offer=refer-and-earn">
+                  <Button className="w-full bg-pink-500 text-white hover:bg-pink-600">Learn More</Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

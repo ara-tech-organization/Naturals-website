@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Crown, Star, Gift, Shield, Clock, Users, Check, X } from 'lucide-react';
 
 const Membership = () => {
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState('');
   const [isFlipped, setIsFlipped] = useState({});
 
@@ -234,6 +236,7 @@ const Membership = () => {
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedPlan(plan.id);
+                    navigate(`/contact?plan=${plan.id}`);
                   }}
                 >
                   Choose {plan.name}
@@ -302,12 +305,16 @@ const Membership = () => {
             Start saving money and enjoying premium benefits today. Contact us to get started!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-purple-600">
-              Visit Our Salon
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
-              Call +91 90870 00049
-            </Button>
+            <Link to="/location">
+              <Button size="lg" variant="secondary" className="text-purple-600">
+                Visit Our Salon
+              </Button>
+            </Link>
+            <a href="tel:+919087000049">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
+                Call +91 90870 00049
+              </Button>
+            </a>
           </div>
         </section>
       </div>

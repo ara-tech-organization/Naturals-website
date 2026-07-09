@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +9,8 @@ import { MapPin, Phone, Mail, Clock, MessageCircle, Users, Calendar, Star } from
 import AOS from 'aos';
 
 const Contact = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -47,8 +50,8 @@ const Contact = () => {
       });
       const data = await response.json();
       if (data.success) {
-        alert('Message sent successfully!');
         setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+        navigate('/thankyou?from=contact');
       } else {
         alert('Something went wrong. Please try again.');
       }
@@ -64,25 +67,23 @@ const Contact = () => {
       icon: Phone,
       title: "Call Us",
       info: "+91 90870 00049",
-      desc: "Available 9 AM - 8 PM"
+      link: "tel:+919087000049"
     },
     {
       icon: Mail,
       title: "Email Us",
       info: "naturals.tj2@gmail.com",
-      desc: "We'll respond within 24 hours"
+      link: "mailto:naturals.tj2@gmail.com"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      info: "Arulananda Nagar",
-      desc: "No 2851/14, No 2, 1st Floor, Philomena Shop,Arulananda Nagar,Thanjavur - 613007"
+      info: "No 2851/14, No 2, 1st Floor, Philomena Shop, Arulananda Nagar, Thanjavur - 613007"
     },
     {
       icon: Clock,
       title: "Working Hours",
-      info: "Mon - Sat: 9 AM - 8 PM",
-      desc: "Sunday: 10 AM - 6 PM"
+      info: "Mon - Sat: 9 AM - 8 PM"
     }
   ];
 
@@ -120,7 +121,11 @@ const Contact = () => {
             <p className="text-2xl md:text-3xl mb-8 text-purple-100">
               We're Here to Make You Beautiful
             </p>
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
+            <Button
+              size="lg"
+              className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3"
+              onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            >
               Contact Us Now
             </Button>
           </div>
@@ -137,30 +142,35 @@ const Contact = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactInfo.map((item, index) => (
-              <Card 
-                key={index} 
-                className="group p-8 text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 cursor-pointer"
-                data-aos="flip-up"
-                data-aos-delay={index * 100}
-              >
-                <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                  <item.icon className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-lg font-semibold text-primary mb-2">{item.info}</p>
-                <p className="text-gray-600">{item.desc}</p>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+            {contactInfo.map((item, index) => {
+              const CardContent = (
+                <Card
+                  className="group h-full flex flex-col p-8 text-center border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 cursor-pointer"
+                  data-aos="flip-up"
+                  data-aos-delay={index * 100}
+                >
+                  <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                    <item.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className={`font-semibold text-primary ${item.info.length > 30 ? 'text-sm' : 'text-lg'}`}>{item.info}</p>
+                </Card>
+              );
+              return item.link ? (
+                <a key={index} href={item.link} className="h-full block">{CardContent}</a>
+              ) : (
+                <div key={index} className="h-full">{CardContent}</div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="contact-form" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Form */}
@@ -299,35 +309,44 @@ const Contact = () => {
             </p>
           </div>
 
-          {/* Branch Info Card */}
-          <div
-            className="max-w-2xl mx-auto p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group mb-12"
-            data-aos="zoom-in"
-          >
-            <div className="flex items-center space-x-4 mb-4">
-              <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                <MapPin className="h-6 w-6 text-white" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            {/* Branch Info Card */}
+            <div
+              className="h-full flex flex-col justify-center bg-white rounded-2xl p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+              data-aos="fade-right"
+            >
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="w-12 h-12 gradient-bg rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <MapPin className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Naturals</h3>
+                  <p className="text-gray-600">Arulanthar Nagar</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">Naturals</h3>
-                <p className="text-gray-600">Arulanthar Nagar</p>
-              </div>
+              <p className="text-gray-600 mb-6">1st Floor, Philomena Shop, 2851/14, No 2, opposite Vinodhagan Hospital, Arulanthar Nagar, Thanjavur, Tamil Nadu 613007</p>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=Naturals+unisex+salon+Arulanthar+nagar+Thanjavur"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="self-start"
+              >
+                <Button size="sm" className="gradient-bg text-white hover:opacity-90">
+                  Get Directions
+                </Button>
+              </a>
             </div>
-            <p className="text-gray-600 mb-4">1st Floor, Philomena Shop, 2851/14, No 2, opposite Vinodhagan Hospital, Arulanthar Nagar, Thanjavur, Tamil Nadu 613007</p>
-            {/* <Button size="sm" className="gradient-bg text-white hover:opacity-90">
-              Get Directions
-            </Button> */}
-          </div>
 
-          {/* Full Width Map */}
-          <div className="w-full">
-            <iframe
-              className="w-full h-[400px] rounded-xl shadow-lg"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4931029823315!2d79.13116237596353!3d10.773494531878411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab9b069029cff%3A0x58f9279539ef68c4!2sNaturals%20unisex%20salon%20-%20Arulanthar%20nagar!5e0!3m2!1sen!2sin!4v1751542614741!5m2!1sen!2sin"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            {/* Map */}
+            <div className="h-full min-h-[320px]" data-aos="fade-left">
+              <iframe
+                className="w-full h-full min-h-[320px] rounded-xl shadow-lg"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4931029823315!2d79.13116237596353!3d10.773494531878411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab9b069029cff%3A0x58f9279539ef68c4!2sNaturals%20unisex%20salon%20-%20Arulanthar%20nagar!5e0!3m2!1sen!2sin!4v1751542614741!5m2!1sen!2sin"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
@@ -380,12 +399,18 @@ const Contact = () => {
             Contact us today and let our experts take care of your beauty needs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
+            <Button
+              size="lg"
+              className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3"
+              onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            >
               Book Now
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-3">
-              Call: +91 90870 00049
-            </Button>
+            <a href="tel:+919087000049">
+              <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-3">
+                Call: +91 90870 00049
+              </Button>
+            </a>
           </div>
         </div>
       </section>

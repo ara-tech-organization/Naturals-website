@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -7,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Crown, Heart, Sparkles, Star, Gift } from 'lucide-react';
 
 const BridalPackages = () => {
+  const navigate = useNavigate();
   const [selectedPackage, setSelectedPackage] = useState('');
 
   const packages = [
@@ -158,9 +160,12 @@ const BridalPackages = () => {
                     </div>
                   </div>
 
-                  <Button 
+                  <Button
                     className="w-full gradient-bg text-white hover:opacity-90"
-                    onClick={() => setSelectedPackage(pkg.id)}
+                    onClick={() => {
+                      setSelectedPackage(pkg.id);
+                      navigate(`/contact?package=${pkg.id}`);
+                    }}
                   >
                     Book Now
                   </Button>
@@ -194,9 +199,11 @@ const BridalPackages = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="outline" className="w-full">
-                    Book Service
-                  </Button>
+                  <Link to={`/contact?service=${encodeURIComponent(service.name)}`}>
+                    <Button variant="outline" className="w-full">
+                      Book Service
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -210,12 +217,16 @@ const BridalPackages = () => {
             Contact us today for a consultation and let us make your special day absolutely perfect
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-purple-600">
-              Schedule Consultation
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
-              Call +91 90870 00049
-            </Button>
+            <Link to="/contact">
+              <Button size="lg" variant="secondary" className="text-purple-600">
+                Schedule Consultation
+              </Button>
+            </Link>
+            <a href="tel:+919087000049">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
+                Call +91 90870 00049
+              </Button>
+            </a>
           </div>
         </section>
       </div>

@@ -8,7 +8,10 @@ import AOS from 'aos';
 const ThankYou = () => {
   const [searchParams] = useSearchParams();
   const from = searchParams.get('from');
-  const backUrl = from === 'tnjnaturals' ? '/naturalsappoinment' : '/naturalstnj';
+  const backUrl =
+    from === 'tnjnaturals' ? '/naturalsappoinment' :
+    from === 'contact' ? '/' :
+    '/naturalstnj';
 
   useEffect(() => {
     AOS.init({
@@ -36,14 +39,14 @@ const ThankYou = () => {
         <div className="bg-primary text-white py-2 hidden lg:block">
           <div className="container mx-auto px-4 flex justify-between items-center text-sm">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-1">
+              <a href="tel:+919087000049" className="flex items-center space-x-1 hover:underline">
                 <Phone className="h-4 w-4" />
                 <span>+91 90870 00049</span>
-              </div>
-              <div className="flex items-center space-x-1">
+              </a>
+              <a href="mailto:naturals.tj2@gmail.com" className="flex items-center space-x-1 hover:underline">
                 <Mail className="h-4 w-4" />
                 <span>naturals.tj2@gmail.com</span>
-              </div>
+              </a>
             </div>
             <div className="hidden md:block">
               <span>Premium Beauty & Wellness Services in Thanjavur</span>
@@ -68,9 +71,12 @@ const ThankYou = () => {
       {/* Thank You Content */}
       <section className="flex-1 flex items-center justify-center py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center" data-aos="zoom-in">
-            <div className="mb-8">
-              <CheckCircle className="h-24 w-24 text-green-500 mx-auto mb-6" />
+          <div
+            className="max-w-2xl mx-auto text-center bg-white rounded-3xl shadow-2xl border border-purple-100 px-8 py-14 md:px-16 md:py-16"
+            data-aos="zoom-in"
+          >
+            <div className="w-24 h-24 gradient-bg rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
+              <CheckCircle className="h-14 w-14 text-white" />
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               Thank You!
@@ -79,10 +85,10 @@ const ThankYou = () => {
               Your message has been sent successfully.
             </p>
             <p className="text-lg text-gray-500 mb-10">
-              Our team will get back to you . We look forward to helping you look and feel your best!
+              Our team will get back to you. We look forward to helping you look and feel your best!
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href={backUrl}>
                 <Button size="lg" className="gradient-bg text-white hover:opacity-90 font-semibold px-8 py-4 text-lg">
                   <ArrowLeft className="h-5 w-5 mr-2" />
@@ -96,7 +102,6 @@ const ThankYou = () => {
                 </Button>
               </a>
             </div>
-
           </div>
         </div>
       </section>

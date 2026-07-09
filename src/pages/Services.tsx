@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Clock, Star, Users, Award, Scissors, Sparkles, Heart, Zap } from 'lucide-react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import AOS from 'aos';
 
 const Services = () => {
@@ -145,7 +146,11 @@ const Services = () => {
             <p className="text-2xl md:text-3xl mb-8 text-purple-100">
               Premium Beauty Solutions for Everyone
             </p>
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
+            <Button
+              size="lg"
+              className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3"
+              onClick={() => document.getElementById('women-services')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            >
               Explore Services
             </Button>
           </div>
@@ -153,7 +158,7 @@ const Services = () => {
       </section>
 
       {/* Women Services Section */}
-      <section className="py-20 bg-white">
+      <section id="women-services" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-5xl font-bold text-gray-900 mb-6">Women's Services</h2>
@@ -305,7 +310,11 @@ const Services = () => {
                 <h3 className="text-2xl font-bold mb-4">Bridal Bliss</h3>
                 <p className="text-gray-600 mb-6">Complete bridal package with pre-bridal treatments, makeup, and styling</p>
                 <div className="text-3xl font-bold text-primary mb-6">₹15,000</div>
-                <Button className="w-full gradient-bg text-white">Book Package</Button>
+                <Link to="/bridal-packages">
+                  <Link to="/contact">
+                  <Button className="w-full gradient-bg text-white">Book Package</Button>
+                </Link>
+                </Link>
               </div>
             </Card>
             
@@ -317,7 +326,9 @@ const Services = () => {
                 <h3 className="text-2xl font-bold mb-4">Glow Up</h3>
                 <p className="text-gray-600 mb-6">Hair treatment, facial, manicure, and pedicure combo package</p>
                 <div className="text-3xl font-bold text-primary mb-6">₹3,500</div>
-                <Button className="w-full gradient-bg text-white">Book Package</Button>
+                <Link to="/contact">
+                  <Button className="w-full gradient-bg text-white">Book Package</Button>
+                </Link>
               </div>
             </Card>
             
@@ -329,7 +340,9 @@ const Services = () => {
                 <h3 className="text-2xl font-bold mb-4">Gentlemen's Club</h3>
                 <p className="text-gray-600 mb-6">Complete men's grooming with haircut, beard styling, and facial</p>
                 <div className="text-3xl font-bold text-primary mb-6">₹1,200</div>
-                <Button className="w-full gradient-bg text-white">Book Package</Button>
+                <Link to="/contact">
+                  <Button className="w-full gradient-bg text-white">Book Package</Button>
+                </Link>
               </div>
             </Card>
           </div>
@@ -373,12 +386,16 @@ const Services = () => {
             Book your appointment today and experience the best beauty services in Thanjavur
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
-              Book Appointment
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-3">
-              Call Now: +91 90870 00049
-            </Button>
+            <Link to="/contact">
+              <Button size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3">
+                Book Appointment
+              </Button>
+            </Link>
+            <a href="tel:+919087000049">
+              <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-3">
+                Call Now: +91 90870 00049
+              </Button>
+            </a>
           </div>
         </div>
       </section>
