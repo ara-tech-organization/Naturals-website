@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { MapPin, Phone, Mail, Clock, MessageCircle, Users, Calendar, Star } from 'lucide-react';
 import AOS from 'aos';
 
@@ -35,6 +36,10 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleServiceChange = (value: string) => {
+    setFormData({ ...formData, service: value });
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -219,19 +224,17 @@ const Contact = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Service Interest</label>
-                      <select 
-                        name="service"
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
-                      >
-                        <option value="">Select a service</option>
-                        <option value="Hair Care & Styling">Hair Care & Styling</option>
-                        <option value="Bridal Package">Bridal Package</option>
-                        <option value="Facial & Skin Care">Facial & Skin Care</option>
-                        {/* <option value="Spa & Wellness">Spa & Wellness</option> */}
-                        <option value="Men's Grooming">Men's Grooming</option>
-                      </select>
+                      <Select value={formData.service} onValueChange={handleServiceChange}>
+                        <SelectTrigger className="w-full border-gray-300 focus:border-primary focus:ring-primary">
+                          <SelectValue placeholder="Select a service" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Hair Care & Styling">Hair Care & Styling</SelectItem>
+                          <SelectItem value="Bridal Package">Bridal Package</SelectItem>
+                          <SelectItem value="Facial & Skin Care">Facial & Skin Care</SelectItem>
+                          <SelectItem value="Men's Grooming">Men's Grooming</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
                   
