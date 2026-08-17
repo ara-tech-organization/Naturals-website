@@ -48,10 +48,19 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch('https://naturalsthanjavur.com/api/mail.php', {
+      const response = await fetch('https://naturalsthanjavur.com/api/email.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source: 'Website Contact Page' }),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          city: 'N/A',
+          date: new Date().toISOString().split('T')[0],
+          message: formData.message,
+          source: 'Website Contact Page',
+        }),
       });
       const data = await response.json();
       if (data.success) {
@@ -345,7 +354,7 @@ const Contact = () => {
               <iframe
                 className="w-full h-full min-h-[320px] rounded-xl shadow-lg"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4931029823315!2d79.13116237596353!3d10.773494531878411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab9b069029cff%3A0x58f9279539ef68c4!2sNaturals%20unisex%20salon%20-%20Arulanthar%20nagar!5e0!3m2!1sen!2sin!4v1751542614741!5m2!1sen!2sin"
-                allowFullScreen=""
+                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>

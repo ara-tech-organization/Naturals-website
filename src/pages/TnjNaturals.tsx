@@ -42,16 +42,17 @@ const TnjNaturals = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch('https://naturalsthanjavur.com/api/submit-lead.php', {
+      const response = await fetch('https://naturalsthanjavur.com/api/email.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
+          service: '',
           city: formData.city,
+          date: formData.appointmentDate,
           message: formData.message,
-          appointment_date: formData.appointmentDate,
           source: 'TNJ Naturals Landing Page',
         }),
       });
